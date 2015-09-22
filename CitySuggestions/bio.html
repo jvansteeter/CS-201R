@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>City Finder</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+</head>
+<body>
+<form>
+Enter A Utah City: <input type="text" id="cityfield" value=""><br>
+Suggestion: <span id="txtHint">Empty</span>
+<input id="button" type="submit" value="Submit">
+</form>
+<p>City</p>
+<textarea id="dispcity">No City</textarea>
+<p>Current Weather</p>
+<div id="weather">No weather</div>
+
+<script>
+// $( "#cityfield" ).keyup(function() {
+//   $("#txtHint").text("Keyup "+$("#cityfield").val());
+// });
+
+$( "#cityfield" ).keyup(function() 
+{
+  $.getJSON("staticCity.txt",function(data) {
+    console.log("Got "+data);
+    console.log("Got "+data[0]);
+    console.log("Got "+data[0].city);
+  });
+  $("#txtHint").text("Keyup "+$("#cityfield").val());
+});
+
+var everything;
+  everything = "<ul>";
+  $.each(data, function(i,item) {
+    everything += "<li> "+data[i].city;
+  });
+    
+  everything += "</ul>";
+  $("#txtHint").html(everything);
+</script>
+</body>
+</html>
+
