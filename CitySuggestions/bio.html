@@ -49,25 +49,40 @@ $("#cityfield").keyup(function()
     });
     
 });
-/*
-$( "#cityfield" ).keyup(function() 
+
+$("#button").click(function(e)
 {
-  $.getJSON("staticCity.txt",function(data) {
-    console.log("Got "+data);
-    console.log("Got "+data[0]);
-    console.log("Got "+data[0].city);
-  });
-  $("#txtHint").text("Keyup "+$("#cityfield").val());
+    var value = $("#cityfield").val();
+    console.log(value);
+    e.preventDefault();
+    $("#dispcity").text(value);
+    
+    var myurl = "http://api.wunderground.com/api/e53a25fb87b913fa/conditions/q/UT/";
+    myurl += value;
+    myurl += ".json";
+    console.log(myurl);
+    $.ajax(
+    {
+        url : myurl,
+        dataType : "jsonp",
+        success : function(parsed_json)
+        {
+            console.log(parsed_json);
+            var location = parsed_json['current_observation']['display_location']['city'];
+            var temp_string = parsed_json['current_observation']['temperature_string'];
+            var current_weather = parsed_json['current_observation']['weather'];
+            everything = "<ul>";
+            everything += "<li>Location: " + location;
+            everything += "<li>Temperature: " + temp_string;
+            everything += "<li>Weather: " + current_weather;
+            everything += "</ul>";
+            $("#weather").html(everything);
+        }
+    })
+    
+    
 });
 
-var everything;
-  everything = "<ul>";
-  $.each(data, function(i,item) {
-    everything += "<li> "+data[i].city;
-  });
-    
-  everything += "</ul>";
-  $("#txtHint").html(everything);*/
 </script>
 </body>
 </html>
