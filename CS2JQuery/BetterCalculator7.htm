@@ -1,0 +1,1032 @@
+<style type="text/css">
+ 
+.num {
+cursor:pointer;cursor:hand;
+height: 38px; 
+width: 42px; 
+font-size:16pt;
+font-weight:bold;
+color:black;
+ 
+}
+ 
+.butn {
+cursor:pointer;cursor:hand;
+background:999999;
+height: 38px; 
+width: 54px;
+font-size:20pt;
+font-weight:bold;
+color:white;
+ 
+}
+ 
+.perc {
+cursor:pointer;cursor:hand;
+background:999999;
+height: 38px; 
+width: 42px;
+font-size:18pt;
+font-weight:bold;
+color:white;
+ 
+}
+ 
+.buttn {
+cursor:pointer;cursor:hand;
+background:999999;
+height: 38px; 
+width: 54px;
+font-size:20pt;
+font-weight:bold;
+color:white;
+ 
+}
+ 
+.buttnp {
+cursor:pointer;cursor:hand;
+background:999999;
+height: 38px; 
+width: 54px;
+font-size:22pt;
+font-weight:bold;
+color:white;
+ 
+}
+ 
+.del {
+cursor:pointer;cursor:hand;
+background:eead0e;
+height: 38px; 
+width: 42px;
+font-size:12pt;
+font-weight:bold;
+color:black;
+ 
+}
+ 
+.clear {
+cursor:pointer;cursor:hand;
+background:eead0e;
+height: 38px; 
+width: 42px;
+font-size:16pt;
+font-weight:bold;
+color:black;
+ 
+}
+ 
+.mem1 {
+cursor:pointer;cursor:hand;
+background:00C5CD;
+height: 32px; 
+width: 46px;
+font-size:12pt;
+color:black;
+ 
+}
+ 
+.mem2 {
+cursor:pointer;cursor:hand;
+background:5F9EA0;
+height: 32px; 
+width: 46px;
+font-size:12pt;
+color:white;
+ 
+}
+ 
+.bmem {
+cursor:pointer;cursor:hand;
+background:556B2F;
+height: 32px; 
+width: 46px;
+font-size:12pt;
+color:white;
+ 
+}
+ 
+.memcl {
+cursor:pointer;cursor:hand;
+background:eead0e;
+height: 32px; 
+width: 46px;
+font-size:12pt;
+color:black;
+ 
+}
+ 
+.display {
+background:CCCCCC;
+text-align:right;
+font-size:18px;
+color=black;
+}
+ 
+.memdisp {
+background:CCCCCC;
+text-align:right;
+font-size:16px;
+font-weight:bold;
+color=black;
+}
+ 
+</style>
+<script language="javascript" type="text/javascript">
+<!--
+function open_Calc(mypage,myname,w,h,features) {
+  var winl = (screen.width-w)/2.5;
+  var wint = (screen.height-h)/2.5;
+  if (winl < 0) winl = 0;
+  if (wint < 0) wint = 0;
+  var settings = 'height=' + h + ',';
+  settings += 'width=' + w + ',';
+  settings += 'top=' + wint + ',';
+  settings += 'left=' + winl + ',';
+  settings += features;
+  win = window.open(mypage,myname,settings);
+  win.window.focus();
+}
+ 
+// -->
+</script>
+ 
+<script language-="JavaScript">
+<!--
+ 
+function what(dir) {
+if (event.button == 2) { Help(dir) }
+}
+function Help(dir) {
+var ex;
+if (dir == 'eq') { ex = ' = : Equals\n\n Calculates the result of an equation.\n\n\ Keyboard: Enter' }
+else if (dir == '/') { ex = ' Ã· : Division\n\n Divides one number by another.\n\n\ i.e.: 8 / 2 = 4 \n\n\ Keyboard: /' }
+else if (dir == 'x') { ex = ' x : Multiplication\n\n Multiplies one number by another.\n\n\ i.e.: 2 x 4 = 8 \n\n\ Keyboard: *' }
+else if (dir == '+') { ex = ' + : Addition\n\n Adds two numbers together.\n\n\ i.e.: 3 + 4 = 7 \n\n\ Keyboard: +' }
+else if (dir == '-') { ex = ' - : Subtraction\n\n Subtracts one number from another.\n\n\ i.e.: 7 - 4 = 3 \n\n\ Keyboard: -' }
+else if (dir == '%') { ex = ' % : Percent\n\n Displays the percentage of a number.\n\n\ To find the percentage of one number in relation to another,\n\tenter the first number,\n\thit the X (multiplication) key or * on keyboard,\n\tenter a second number,\n\thit the % key.\n\n\tex: 40 x 10% = 4 \n\n\ Keyboard: %' }
+else if (dir == '.') { ex = ' . : Decimal\n\n Places a decimal point into a number on DISPLAY and RECORD screens.\n\n\ Keyboard: .' }
+else if (dir == '1') { ex = ' 1 : Number 1\n\n Places the number 1 onto DISPLAY and RECORD screens.\n\n\ Keyboard: 1' }
+else if (dir == '2') { ex = ' 2 : Number 2\n\n Places the number 2 onto DISPLAY and RECORD screens.\n\n\ Keyboard: 2' }
+else if (dir == '3') { ex = ' 3 : Number 3\n\n Places the number 3 onto DISPLAY and RECORD screens.\n\n\ Keyboard: 3' }
+else if (dir == '4') { ex = ' 4 : Number 4\n\n Places the number 4 onto DISPLAY and RECORD screens.\n\n\ Keyboard: 4' }
+else if (dir == '5') { ex = ' 5 : Number 5\n\n Places the number 5 onto DISPLAY and RECORD screens.\n\n\ Keyboard: 5' }
+else if (dir == '6') { ex = ' 6 : Number 6\n\n Places the number 6 onto DISPLAY and RECORD screens.\n\n\ Keyboard: 6' }
+else if (dir == '7') { ex = ' 7 : Number 7\n\n Places the number 7 onto DISPLAY and RECORD screens.\n\n\ Keyboard: 7' }
+else if (dir == '8') { ex = ' 8 : Number 8\n\n Places the number 8 onto DISPLAY and RECORD screens.\n\n\ Keyboard: 8' }
+else if (dir == '9') { ex = ' 9 : Number 9\n\n Places the number 9 onto DISPLAY and RECORD screens.\n\n\ Keyboard: 9' }
+else if (dir == '0') { ex = ' 0 : Zero\n\n Places the numerical value 0 onto DISPLAY and RECORD screens.\n\n\ Keyboard: 0' }
+else if (dir == 'DZ') { ex = ' 00 : Double Zero\n\n Adds two zeros to any number. \n\n\ Keyboard: d (double zero)' }
+else if (dir == 'c') { ex = ' C : Clear\n\n Clears the DISPLAY screen\n Remember to clear after each calculation.\n\n\ Keyboard: Space Bar' }
+else if (dir == 'CR') { ex = ' Clear Record : \n\n Clears the RECORD screen leaving contents of\n DISPLAY screen showing.\n\n\ Button click only.' }
+else if (dir == 'CA') { ex = ' Clear All : \n\n Clears all screens.\n\n\ Button click only.' }
+else if (dir == 'Del') { ex = ' Del : Delete\n\n Clears the last digit entered. (backspace)\n\n\ Keyboard: Escape' }
+else if (dir == 'M1') { ex = ' M1 : Memory 1\n\n Copies number in DISPLAY to MEMORY1.\n\n\ Button click only.' }
+else if (dir == 'R1') { ex = ' R1 : Recall 1\n\n Recalls number stored in MEMORY1 and places it into\n the DISPLAY and RECORD screens in (parentheses).\n\n\ Button click only.' }
+else if (dir == 'M2') { ex = ' M2 : Memory 2\n\n Copies number in DISPLAY to MEMORY2.\n\n\ Button click only.' }
+else if (dir == 'R2') { ex = ' R2 : Recall 2\n\n Recalls number stored in MEMORY2 and places it into\n the DISPLAY and RECORD screens in (parentheses).\n\n\ Button click only.' }
+else if (dir == 'M1+') { ex = ' M1+ : Memory 1 Add\n\n Adds number in DISPLAY to MEMORY1.\n\n\ Button click only.' }
+else if (dir == 'M1-') { ex = ' M1- : Memory 1 Subtract\n\n Subtracts number in DISPLAY from MEMORY1.\n\n\ Button click only.' }
+else if (dir == 'M2+') { ex = ' M2+ : Memory 2 Add\n\n Adds number in DISPLAY to MEMORY2.\n\n\ Button click only.' }
+else if (dir == 'M2-') { ex = ' M2- : Memory 2 Subtract\n\n Subtracts number in DISPLAY from MEMORY2.\n\n\ Button click only.' }
+else if (dir == 'BM+') { ex = ' BM+ : Both Memories Add\n\n Adds number in DISPLAY to MEMORY1 and MEMORY2.\n\n\ Button click only.' }
+else if (dir == 'BM-') { ex = ' BM- : Both Memories Subtract\n\n Subtracts number in DISPLAY from MEMORY1 and MEMORY2.\n\n\ Button click only.' }
+else if (dir == 'C1') { ex = ' C1 : Clear 1\n\n Clears number stored in MEMORY1.\n\n\ Button click only.' }
+else if (dir == 'C2') { ex = ' C2 : Clear 2\n\n Clears number stored in MEMORY2.\n\n\ Button click only.' }
+else if (dir == 'NW') { ex = 'New Window : \n\nOpens another Calculator Window.\n\n\You can have multiple Calculators opened at any time.\n\However, you can only have one active Calculator at one time.\n\n\To activate a Calculator, just click on the one you want activated.' }
+else if (dir == 'Copy') { ex = 'Copy:\n\nSelects and copies everything in the RECORD screen to your computer clipboard.\n\nSimply paste it to a new file in your favorite text editor (such as Note Pad) so that you can save it and/or print it out.\n\n\ Button click only.' }
+else if (dir == 'LA') { ex = 'BetterCalculator Loan Amortization Function Help\n\n\Loan Amount\n\tEnter the PRINCIPAL AMOUNT of your loan.\n\tDigits only. No commas.\n\n\% Rate\n\tEnter the INTEREST RATE you will be charged.\n\n\Term Yrs\n\tEnter the term of YEARS for your loan.\n\n\Amortization Schedule\n\tGenerates an AMORTIZATION SCHEDULE for your loan in a\n\tNEW WINDOW. Calculations may take a few moments.\n\n\* NOTE:\tThe results of this loan payment calculator are for\n\tcomparison purposes only. Calculation may contain\n\trounding errors but should be a close approximation of\n\tactual loan repayments from a financial institution.\n\tThey are NOT guaranteed accurate.\n\n\tThe payment result is for PRINCIPAL and INTEREST only.\n\tYour total monthly payment may contain additional fees for\n\ttaxes and insurance. Check with your financial institution.\n' } 
+else if (dir == 'LH') { ex = 'BetterCalculator Monthly Loan Payment Function Help\n\n\Loan Amount\n\tEnter the PRINCIPAL AMOUNT of your loan.\n\tDigits only. No commas.\n\n\% Rate\n\tEnter the INTEREST RATE you will be charged.\n\n\Term Yrs\n\tEnter the term of YEARS for your loan.\n\n\Monthly Payment\n\tShows the monthly PRINCIPAL and INTEREST payment\n\trequired to ammortize your loan.\n\tPlaces the data onto the RECORD screen.\n\n\* NOTE:\tThe results of this loan payment calculator are for\n\tcomparison purposes only. Calculation may contain\n\trounding errors but should be a close approximation of\n\tactual loan repayments from a financial institution.\n\tThey are NOT guaranteed accurate.\n\n\tThe payment result is for PRINCIPAL and INTEREST only.\n\tYour total monthly payment may contain additional fees for\n\ttaxes and insurance. Check with your financial institution.\n' } 
+else if (dir == 'sqrec') { ex = 'sq/rec : \n\nCan be used to find the SQUARE AREA of a SQUARE or RECTANGLE.\n\Just follow the prompts, entering the information asked for.' }
+else if (dir == 'tri') { ex = 'triangle : \n\nCan be used to find the SQUARE AREA of a TRIANGLE.\n\Just follow the prompts, entering the information asked for.' }
+else if (dir == 'cir') { ex = 'circle : \n\nCan be used to find the SQUARE AREA of a CIRCLE.\n\Just follow the prompt, entering the information asked for.' }
+else if (dir == 'cube') { ex = 'cube : \n\nCan be used to find the CUBIC VOLUME of a CUBE or BOX.\n\Just follow the prompts, entering the information asked for.' }
+else if (dir == 'sph') { ex = 'sphere : \n\nCan be used to find the CUBIC VOLUME of a SPHERE or BALL.\n\Just follow the prompts, entering the information asked for.' }
+else if (dir == 'cyl') { ex = 'cylinder : \n\nCan be used to find the CUBIC VOLUME of a CYLINDER.\n\Just follow the prompts, entering the information asked for.' }
+else if (dir == 'crunch') { ex = '#Cruncher : \n\nReturns the decimal number you enter Squared and Cubed as well as the Logarithm, Sin, Cosine, Tangent, Square Root, Hexadecimal and Binary equivalent onto the RECORD screen.'}
+else if (dir == 'pi') { ex = 'Pi : \n\nPlaces the numerical value of Pi onto DISPLAY and RECORD screens.\n\n(to eight decimal places)'}
+else if (dir == 'frac') { ex = 'Fraction : \n\nConverts a fraction into a decimal equivalent.\n\nBe sure you know the math terms.\n\In the fraction 3 / 8,  3 is the numerator, and 8 is the denominator.\n\nIn this example, you would get a return of  0.375 because 0.375 is equivalent to 3/8 of the whole number 1.'}
+else if (dir == 'Ab') { ex = 'BetterCalculator 7 is freeware Javascript.\n\n\Left click the HELP button to open the HELP window.\n\n\Right click on any button for help with that function.\n\n\REMEMBER TO CLEAR the Display screen after each calculation!\n\n\n\Thank you\n\n\Jim Anderson \n'}
+alert(ex);
+}
+ 
+var newWindow;
+ 
+function makeNewWindow() {
+newWindow = window.open()
+    }
+ 
+function roundtocents(n)
+{
+cents = n * 100;
+cents = Math.round(cents);
+     
+strcents = "" + cents;
+len = strcents.length;
+ 
+return strcents.substring(0, len - 2) + "." + strcents.substring(len - 2, len);
+}
+ 
+ 
+function monthly(principal, years, apr)
+{
+ 
+rate = apr / 12;
+payments = years *12;
+return roundtocents(principal * rate / (1 - (1 / Math.pow(1 + rate, payments))));
+}
+ 
+function monthlyamortization(principal, years, apr)
+{
+var interestpayment; var principalpayment; var i;
+var payments = years * 12;
+var monthlyinterest = apr /12;
+var monthlypayment = monthly(principal, years, apr);
+var rndprincipal = roundtocents(principal);
+var monthpayment = monthly(principal, years, apr);
+var totinterest = 0; var totpayments= 0;
+var rndintpayment;
+var rndprncppayment;
+var rndprincipal;
+var linecounter = 0;
+     
+var cents1, cents2, cents3, strcents1, strcents2, strcents3, len1, len2, len3;
+ 
+makeNewWindow();
+newWindow.document.write("<CENTER>");
+newWindow.document.write("<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1 WIDTH=540 class=text>");    
+newWindow.document.write("<TR BGCOLOR=#FFFFFF>");
+newWindow.document.write("<TD ALIGN=CENTER><b>Loan Amortization Schedule</b></TD></TR>");
+newWindow.document.write("</TABLE>");
+ 
+newWindow.document.write("<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1 WIDTH=540 class=text>");
+newWindow.document.write("<TR BGCOLOR=#EFEFE9>");
+newWindow.document.write("<TD ALIGN=CENTER>Loan Summary</TD></TR>");
+newWindow.document.write("</TABLE>");
+ 
+newWindow.document.write("<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1 WIDTH=540 class=text>");
+newWindow.document.write("<TR BGCOLOR=#EFEFE9>");
+newWindow.document.write("<TD ALIGN=CENTER><B>Principal</B></TD>"); 
+newWindow.document.write("<TD ALIGN=CENTER><B>Term Yrs</B></TD>");  
+newWindow.document.write("<TD ALIGN=CENTER><B>APR</B></TD>");
+newWindow.document.write("<TD ALIGN=CENTER><B>Payment</B></TD></TR>");    
+newWindow.document.write("<TD ALIGN=CENTER>");
+newWindow.document.write("$" + (principal));
+newWindow.document.write("</TD>");    
+newWindow.document.write("<TD ALIGN=CENTER>");
+newWindow.document.write(years);
+newWindow.document.write("</TD>");    
+newWindow.document.write("<TD ALIGN=CENTER>");
+newWindow.document.write((apr) + "%");
+newWindow.document.write("</TD>");
+newWindow.document.write("<TD ALIGN=CENTER>");
+newWindow.document.write("$" + (monthpayment));
+newWindow.document.write("</TD></TR>"); 
+newWindow.document.write("<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1 WIDTH=540 class=text>");    
+newWindow.document.write("<TR BGCOLOR=#EFEFE9><BR><CENTER>Amortization Table<BR>");
+newWindow.document.write("<TD ALIGN=CENTER><B>Pmt</B></TD>");
+newWindow.document.write("<TD ALIGN=CENTER><B>Principal</B></TD>");
+newWindow.document.write("<TD ALIGN=CENTER><B>Interest</B></TD>");
+newWindow.document.write("<TD ALIGN=CENTER><B>Balance</B></TD></TR>");
+         
+for(i = 1; i <= payments; i++)
+    {
+        if (linecounter == 1)
+            {
+                newWindow.document.write("<TR BGCOLOR=#EFEFE9>");(linecounter = 0);
+            }
+        else
+            {
+                                                    newWindow.document.write("<TR BGCOLOR=#FFFFFF>");(linecounter = 1);
+            }   
+ 
+newWindow.document.write("<TD ALIGN=CENTER WIDTH=16%>" + i + "</TD>");
+ 
+interestpayment = principal * monthlyinterest;
+cents1 = interestpayment * 100;
+cents1 = Math.round(cents1);
+strcents1 = "" + cents1;
+len1 = strcents1.length;
+rndintpayment= strcents1.substring(0, len1 - 2) + "." + strcents1.substring(len1 - 2, len1);
+     
+principalpayment = monthlypayment - interestpayment;
+cents2 = principalpayment * 100;
+cents2 = Math.round(cents2);
+strcents2 = "" + cents2;
+len2 = strcents2.length;
+rndprncppayment= strcents2.substring(0, len2 - 2) + "." + strcents2.substring(len2 - 2, len2);
+newWindow.document.write("<TD ALIGN=CENTER WIDTH=27%>$" + (rndprncppayment) + "</TD>");
+newWindow.document.write("<TD ALIGN=CENTER WIDTH=27%>$" + (rndintpayment) + "</TD>");
+     
+principal -= principalpayment;
+cents3 = principal * 100;
+cents3 = Math.round(cents3);
+strcents3 = "" + cents3;
+len3 = strcents3.length;
+rndprincipal= strcents3.substring(0, len3 - 2) + "." + strcents3.substring(len3 - 2, len3);
+newWindow.document.write("<TD ALIGN=CENTER WIDTH=30%>$" + (rndprincipal) + "</TD>");
+     
+newWindow.document.write("</td></tr>");
+totinterest= totinterest + interestpayment;
+totpayments= totpayments + interestpayment + principalpayment;
+}
+     
+cents3 = totinterest * 100;
+cents3 = Math.round(cents3);
+strcents3 = "" + cents3;
+len3 = strcents3.length;
+totinterest= strcents3.substring(0, len3 - 2) + "." + strcents3.substring(len3 - 2, len3);
+     
+cents3 = totpayments * 100;
+cents3 = Math.round(cents3);
+strcents3 = "" + cents3;
+len3 = strcents3.length;
+totpayments= strcents3.substring(0, len3 - 2) + "." + strcents3.substring(len3 - 2, len3);
+ 
+newWindow.document.write("<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=1 WIDTH=540 class=text>");
+newWindow.document.write("<TR BGCOLOR=#EFEFE9>");
+newWindow.document.write("<TD ALIGN=CENTER WIDTH=30%><B>Total Interest</B></TD>");
+newWindow.document.write("<TD ALIGN=CENTER WIDTH=40%><B>Total  P & I (cost of loan)</B></TD></TR>");
+newWindow.document.write("<TD ALIGN=CENTER>");
+newWindow.document.write("$" + (totinterest));
+newWindow.document.write("</TD>");    
+newWindow.document.write("<TD ALIGN=CENTER>");
+newWindow.document.write("$" + (totpayments));
+newWindow.document.write("</TD>");    
+newWindow.document.write("</TR>");
+newWindow.document.write("</table>");
+newWindow.document.close();
+}
+ 
+function monthlyamortization2(principal, years, apr)
+{
+var interestpayment; var principalpayment; var i;
+var payments = years * 12;
+var monthlyinterest = apr /12;
+var monthlypayment = monthly(principal, years, apr);
+var rndprincipal = roundtocents(principal);
+var monthpayment = monthly(principal, years, apr);
+var totinterest = 0; var totpayments= 0;
+var rndintpayment;
+var rndprncppayment;
+var rndprincipal;
+     
+var cents1, cents2, cents3, strcents1, strcents2, strcents3, len1, len2, len3;
+ 
+calculator.record.value+=("$" + (rndprincipal));
+calculator.record.value+=(" @ " + (apr) + '%');
+calculator.record.value+=(" for " + years + " years ");
+calculator.record.value+=("= $" + (monthpayment) + ' P&I' + '\n');
+         
+{
+ 
+interestpayment = principal * monthlyinterest;
+cents1 = interestpayment * 100;
+cents1 = Math.round(cents1);
+strcents1 = "" + cents1;
+len1 = strcents1.length;
+rndintpayment= strcents1.substring(0, len1 - 2) + "." + strcents1.substring(len1 - 2, len1);
+ 
+     
+principalpayment = monthlypayment - interestpayment;
+cents2 = principalpayment * 100;
+cents2 = Math.round(cents2);
+strcents2 = "" + cents2;
+len2 = strcents2.length;
+rndprncppayment= strcents2.substring(0, len2 - 2) + "." + strcents2.substring(len2 - 2, len2);
+ 
+     
+principal -= principalpayment;
+cents3 = principal * 100;
+cents3 = Math.round(cents3);
+strcents3 = "" + cents3;
+len3 = strcents3.length;
+rndprincipal= strcents3.substring(0, len3 - 2) + "." + strcents3.substring(len3 - 2, len3);
+ 
+     
+totinterest= totinterest + interestpayment;
+totpayments= totpayments + interestpayment + principalpayment;
+}
+     
+cents3 = totinterest * 100;
+cents3 = Math.round(cents3);
+strcents3 = "" + cents3;
+len3 = strcents3.length;
+totinterest= strcents3.substring(0, len3 - 2) + "." + strcents3.substring(len3 - 2, len3);
+     
+cents3 = totpayments * 100;
+cents3 = Math.round(cents3);
+strcents3 = "" + cents3;
+len3 = strcents3.length;
+totpayments= strcents3.substring(0, len3 - 2) + "." + strcents3.substring(len3 - 2, len3);
+}
+ 
+function amort(form)
+{
+    if((form.principal.value.length != 0) && (form.apr.value.length != 0) && (form.years.value.length != 0))
+    {
+        principal = eval(form.principal.value);
+        apr= eval(form.apr.value) / 100.0;
+        years = eval(form.years.value);
+         
+        if (years == 0.0)
+        {
+            alert("You have no monthly payment, since the # of years is 0.");
+        }
+        else
+        {
+            monthlyamortization(principal, years, apr);
+        }
+    }
+    else
+    {
+        alert("You must fill in all the fields if you want a calculation!");
+    }
+}
+ 
+function payment(form)
+{
+    if((form.principal.value.length != 0) && (form.apr.value.length != 0) && (form.years.value.length != 0))
+    {
+        principal = eval(form.principal.value);
+        apr= eval(form.apr.value) / 100.0;
+        years = eval(form.years.value);
+         
+        if (years == 0.0)
+        {
+            alert("You have no monthly payment, since the # of years is 0.");
+        }
+        else
+        {
+            monthlyamortization2(principal, years, apr);
+        }
+    }
+    else
+    {
+        alert("You must fill in all the fields if you want a calculation!!");
+    }
+}
+ 
+function open_calendar(mypage,myname,w,h,features) {
+  var winl = (screen.width-w)/1.6;
+  var wint = (screen.height-h)/4.4;
+  if (winl < 0) winl = 0;
+  if (wint < 0) wint = 0;
+  var settings = 'height=' + h + ',';
+  settings += 'width=' + w + ',';
+  settings += 'top=' + wint + ',';
+  settings += 'left=' + winl + ',';
+  settings += features;
+  win = window.open(mypage,myname,settings);
+  win.window.focus();
+}
+ 
+//-->
+</script>
+ 
+<center><font face="Verdana, Helvetica, Sans-serif">
+ 
+<script language="javascript" type="text/javascript">
+<!--
+var mem1 = '0';
+var mem2 = '0';
+var w3c=(document.getElementById)?true:false;
+var ns4=(document.layers)?true:false;
+var ns6=(w3c && navigator.appName.indexOf("Netscape")>=0)?true:false;
+ 
+var whichkey;
+ 
+function calc() {
+document.calculator.display.value= eval(document.calculator.display.value);
+document.calculator.record.value+=" = "+eval(document.calculator.display.value);
+return true
+}
+ 
+function clear()
+{
+document.calculator.display.value='';
+document.calculator.record.value+='\n';
+ 
+}
+ 
+function deleteChar()
+{
+document.calculator.display.value=document.calculator.display.value.substring(0,document.calculator.display.value.length-1);
+document.calculator.record.value=document.calculator.record.value.substring(0,document.calculator.record.value.length-1);
+}
+ 
+function dec(){
+calculator.display.value+='.';calculator.record.value+='.';
+}
+ 
+function perc() {
+document.calculator.display.value= eval(document.calculator.display.value)/100;
+document.calculator.record.value+="% = "+eval(document.calculator.display.value);
+return true
+}
+ 
+function round(value)
+{
+return Math.round(value*Math.pow(10,2))/Math.pow(10,2);
+return true
+}
+ 
+bBool=false
+var copiedtext=""
+var tempstore=""
+ 
+function initiatecopy() {
+bBool=true;
+}
+ 
+function copyit() {
+if (bBool) {
+tempstore=copiedtext
+document.execCommand("Copy")
+copiedtext=window.clipboardData.getData("Text");
+ 
+bBool=false;
+}
+}
+ 
+document.onselectionchange = initiatecopy
+document.onmouseup = copyit
+ 
+function showkeypress(keypress){
+if(!(ns4||ns6))whichkey=event.keyCode;
+else whichkey=keypress.which;
+if((whichkey>=48)&&(whichkey<=57)){
+ 
+whichkey=whichkey-48;calculator.display.value+=whichkey;calculator.record.value+=whichkey;
+ 
+}else{
+if (whichkey == 13)
+   {calc()};
+ 
+if (whichkey == 27) 
+   {deleteChar()};
+ 
+if (whichkey == 32)
+   {clear()}; 
+ 
+if (whichkey == 37)
+   {perc()};
+ 
+if (whichkey == 42)
+   {calculator.display.value+='*';calculator.record.value+=' x '};
+ 
+if (whichkey == 43)
+   {calculator.display.value+='+';calculator.record.value+=' + '}; 
+ 
+if (whichkey == 45)
+   {calculator.display.value+='-';calculator.record.value+=' - '};
+ 
+if (whichkey == 46)
+   {dec()};
+ 
+if (whichkey == 47)
+   {calculator.display.value+='/';calculator.record.value+=' / '};
+ 
+if (whichkey == 100)
+   {calculator.display.value+='00';calculator.record.value+='00'};
+ 
+if (whichkey == 115)
+   {sqroot()};
+}}
+ 
+if(ns4){
+window.captureEvents(Event.KEYPRESS);
+window.onkeypress=showkeypress;
+}else document.onkeypress=showkeypress;
+//-->
+</script>
+ 
+<br><br><br>
+<table width="428" cellpadding="1" bgcolor="#999999" border="2" bordercolordark="#333399" bordercolorlight="#0033FF">
+<td valign=top align=center>
+ 
+<table width="160" cellpadding="1" style="border: 1px solid ivory">
+ 
+<FORM name="calculator">
+ 
+<tr><td><center>
+ 
+<font size="2" color="ffffff">BetterCalculator 7</font>
+ 
+</td></tr>
+<tr><td valign=top align=center><input type="text" class="display" value="" name="display" value="input" size="20"><br>
+</td></tr></table>
+ 
+<table width="160" cellpadding="1" bgcolor="#8b8b83" border="1" bordercolordark="#66CCFF" bordercolorlight="#FFFFF0">
+ 
+<tr><td><input type="button" class="num" value="7" 
+onmousedown=what('7');
+onmouseup="calculator.display.value+='7';calculator.record.value+='7';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="8" 
+onmousedown=what('8');
+onmouseup="calculator.display.value+='8';calculator.record.value+='8';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="9" 
+onmousedown=what('9');
+onmouseup="calculator.display.value+='9';calculator.record.value+='9';this.blur()"></td>
+ 
+<td><input type="button" class="butn" value="x"
+onmousedown=what('x');
+onmouseup="calculator.display.value+='*';calculator.record.value+=' x ';this.blur()"></td></tr>
+ 
+<tr><td><input type="button" class="num" value="4" 
+onmousedown=what('4');
+onmouseup="calculator.display.value+='4';calculator.record.value+='4';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="5" 
+onmousedown=what('5');
+onmouseup="calculator.display.value+='5';calculator.record.value+='5';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="6" 
+onmousedown=what('6');
+onmouseup="calculator.display.value+='6';calculator.record.value+='6';this.blur()"></td>
+ 
+<td><input type="button" class="buttn" value="&#247;" 
+style="cursor:pointer;cursor:hand"onmousedown=what('/');
+onclick="calculator.display.value+='/';calculator.record.value+=' / ';this.blur()"></td></tr>
+ 
+<tr><td><input type="button" class="num" value="1" 
+onmousedown=what('1');
+onmouseup="calculator.display.value+='1';calculator.record.value+='1';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="2" 
+onmousedown=what('2');
+onmouseup="calculator.display.value+='2';calculator.record.value+='2';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="3" 
+onmousedown=what('3');
+onmouseup="calculator.display.value+='3';calculator.record.value+='3';this.blur()"></td>
+ 
+<td><input type="button" class="buttn" value="-" 
+onmousedown=what('-');
+onclick="calculator.display.value+='-';calculator.record.value+=' - ';this.blur()"></td></tr>
+ 
+<tr><td><input type="button" class="num" value="0" 
+onmousedown=what('0');
+onmouseup="calculator.display.value+='0';calculator.record.value+='0';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="00" 
+onmousedown=what('DZ');
+onmouseup="calculator.display.value+='00';calculator.record.value+='00';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="&#149;" 
+onmousedown=what('.');
+onclick="this.blur();dec()"></td>
+ 
+<td><input type="button" class="buttnp" value="+" 
+onmousedown=what('+');
+onclick="calculator.display.value+='+';calculator.record.value+=' + ';this.blur()"></td></tr>
+ 
+<tr><td><input type="button" class="perc" value="%" 
+style="cursor:pointer;cursor:hand"onmousedown=what('%');
+onclick="perc();this.blur()"></td>
+ 
+<td><input type="button" class="del" value="Del" 
+style="cursor:pointer;cursor:hand"onmousedown=what('Del');
+onMouseUp="this.blur();deleteChar()"></td>
+ 
+<td><input type="button" class="clear" value="C" 
+onmousedown=what('c');
+onClick="this.blur();document.calculator.display.value='';document.calculator.record.value+='\n'"></td>
+ 
+<td><input type="button" class="buttnp" value="=" 
+onmousedown=what('eq');
+onMouseUp="this.blur();calc()"></td></tr></table>
+ 
+<table width="160" cellpadding="0" bgcolor="#8b8b83" border="1" bordercolor="#66CDAA">
+ 
+<td><input type="button" class="mem1" value="M1" 
+onmousedown=what('M1');
+onclick="mem1.value=calculator.display.value;this.blur()"></td>
+ 
+<td><input type="button" class="mem1" value="R1" 
+onmousedown=what('R1');
+onclick="calculator.record.value=calculator.record.value+'('+mem1.value+')';calculator.display.value=calculator.display.value+'('+(mem1.value)+')';this.blur()"></td>
+ 
+<td><input type="button" class="mem2" value="M2" 
+onmousedown=what('M2');
+onclick="mem2.value=calculator.display.value;this.blur()"></td>
+ 
+<td><input type="button" class="mem2" value="R2" 
+onmousedown=what('R2');
+onclick="calculator.record.value=calculator.record.value+'('+mem2.value+')';calculator.display.value=calculator.display.value+'('+(mem2.value)+')';this.blur()"></td></tr>
+ 
+<td><input type="button" class="mem1" value="M1+" 
+onmousedown=what('M1+');
+onmouseup="mem1.value=eval(mem1.value)+eval(calculator.display.value);this.blur()"></td>
+ 
+<td><input type="button" class="mem1" value="M1-" 
+onmousedown=what('M1-');
+onmouseup="mem1.value=eval(mem1.value)-eval(calculator.display.value);this.blur()"></td>
+ 
+<td><input type="button" class="mem2" value="M2+" 
+onmousedown=what('M2+');
+onmouseup="mem2.value=eval(mem2.value)+eval(calculator.display.value);this.blur()"></td>
+ 
+<td><input type="button" class="mem2" value="M2-" 
+onmousedown=what('M2-');
+onmouseup="mem2.value=eval(mem2.value)-eval(calculator.display.value);this.blur()"></td></tr>
+ 
+<td><input type="button" class="memcl" value="C1" 
+onmousedown=what('C1');
+onclick="mem1.value='0';this.blur()"></td>
+ 
+<td><input type="button" class="bmem" value="BM+" 
+onmousedown=what('BM+');
+onmouseup="mem1.value=eval(mem1.value)+eval(calculator.display.value);mem2.value=eval(mem2.value)+eval(calculator.display.value);this.blur()"></td>
+ 
+<td><input type="button" class="bmem" value="BM-" 
+onmousedown=what('BM-');
+onmouseup="mem1.value=eval(mem1.value)-eval(calculator.display.value);mem2.value=eval(mem2.value)-eval(calculator.display.value);this.blur()"></td>
+ 
+<td><input type="button" class="memcl" value="C2" 
+onmousedown=what('C2');
+onclick="mem2.value='0';this.blur()"></td></tr></table>
+ 
+<table width="210" cellpadding="1" bgcolor="#3CB371" border="2" bordercolor="#333399" >
+ 
+<form name="mem">
+<font face="Verdana, Helvetica, Sans-serif">
+<td align=left bgcolor=9FB6CD><font size=3 color=000000><b>&nbsp;M1 </b>
+<input type="text" class="memdisp" value="0" name="mem1" value="input" size="16"></font></td></tr>
+ 
+<tr><td align=left bgcolor=9FB6CD><font size=3 color=ffffff><b>&nbsp;M2 </b>
+<input type="text" class="memdisp" value="0" name="mem2" value="input" size="16"></font></td></tr></table>
+ 
+<td align=center valign=top bgcolor="#3399CC" border=0><font size="2" color="#000000">
+ 
+ 
+<textarea style="font-size: 18px;color=000000;background=cccccc;" type="text" value="" name="record" cols="44" rows="14">
+</textarea>
+ 
+<p align=center>
+<input style="font-size:11pt; height: 21px; width: 64px;color=000000;background=eead0e;" type="button" value="Clear All"
+style="cursor:pointer;cursor:hand"onmousedown=what('CA');
+onclick="calculator.record.value='';calculator.display.value='';mem1.value='0';mem2.value='0';principal.value='';apr.value='';years.value='';this.blur()">&nbsp;
+ 
+<input style="font-size:11pt; height: 21px; width: 94px;color=000000;background=eead0e;" type="button" value="Clear Record" 
+style="cursor:pointer;cursor:hand"onmousedown=what('CR');
+onclick="calculator.record.value='';calculator.record.value='';this.blur()">&nbsp;
+ 
+<input style="font-size:11pt; height: 21px; width: 46px;color=ffffff;background=8b658b;" type=button value="Copy" 
+style="cursor:pointer;cursor:hand" onmousedown=what('Copy');
+onClick="JavaScript:this.form.record.focus();this.form.record.select();initiatecopy();copyit();this.blur()">&nbsp;
+ 
+<input style="font-size:11pt; height: 21px; width: 94px;color=ffffff;background=007777;" type="button" value="New Window" 
+style="cursor:pointer;cursor:hand" onmousedown=what('NW');
+onclick="open_Calc('BetterCalculator7.htm','','756','600','');this.blur()">&nbsp;
+ 
+<input style="font-size:11pt; height: 21px; width: 42px;color=ffffff;background=8b658b;" type="button" value="Help" 
+style="cursor:help"onmousedown=what('Ab');
+onclick="alert('BetterCalculator 7 is freeware Javascript.\n\n\You DO NOT have to be on-line to use this Calculator once you save it\n\on your desktop. Remember to save the separate calendar script.\n\n\Left click to select a button.\nRight click on any button for help with that function.\n\n\All numeric and most functions may be input by using your keyboard.\n\n\If your computer has a numeric keypad, be sure to press your num lock button in order to use it.\n\n\If the calculator is not recognizing keypad input, then press the CLEAR key with your mouse. This should activate recognition from your keypad.\n\n\REMEMBER TO CLEAR the Display screen after each calculation!\n\Failure to do so may cause incorrect calculations.\n\n\Thank you and enjoy,\n\n\-Jim Anderson- \n');this.blur()">
+ 
+<p align=center>
+ 
+<form NAME="form">
+ 
+<table bgcolor="#9FB6CD" border="1"><tr><td>
+<div align=center><font size="1"><b>Loan<br>Amount</b></div></td><td>
+<div align=center><font size="1"><b>%<br>Rate</b></div></td><td>
+<div align=center><font size="1"><b>Term<br>Yrs</b></div></td><td>
+</td><td bgcolor="#999999">
+<div align=center><font size="2">
+<input style="font-size:11pt; height: 20px; width: 84px;color=ffffff;background=8b658b;;" type="button" value="Monthly Pmt"
+style="cursor:pointer;cursor:hand" onmousedown=what('LH');
+onclick="payment(this.form);this.blur()">
+</div></td><tr><td>
+<input style="font-size: 14px;color=000000;background=cccccc;" type="text" name=principal SIZE=12;
+OnChange="calculator.display.value='';calculator.record.value=''"></td><td>
+<input style="font-size: 14px;color=000000;background=cccccc;" type="text" name=apr SIZE=4;
+OnChange="calculator.display.value='';calculator.record.value=''"></td><td>
+<input style="font-size: 14px;color=000000;background=cccccc;" type="text" name=years SIZE=3;
+OnChange="calculator.display.value='';calculator.record.value=''"></td><td></td><td>
+<input style="font-size:11pt; height: 20px; width: 84px;color=ffffff;background=8b658b;;" type="button" value="Amortization"style="cursor:pointer;cursor:hand" onmousedown=what('LA');
+onclick="amort(this.form);this.blur()">
+</td></form>
+</div></td>
+ 
+<SCRIPT language="JavaScript">
+<!--
+function startclock()
+{
+var thetime=new Date();
+ 
+var nhours=thetime.getHours();
+var nmins=thetime.getMinutes();
+var nsecn=thetime.getSeconds();
+var nday=thetime.getDay();
+var nmonth=thetime.getMonth();
+var ntoday=thetime.getDate();
+var nyear=thetime.getYear();
+var AorP=" ";
+ 
+if (nhours>=12)
+    AorP="P.M.";
+else
+    AorP="A.M.";
+ 
+if (nhours>=13)
+    nhours-=12;
+ 
+if (nsecn<10)
+ nsecn="0"+nsecn;
+ 
+if (nmins<10)
+ nmins="0"+nmins;
+ 
+if (nday==0)
+  nday="Sunday";
+if (nday==1)
+  nday="Monday";
+if (nday==2)
+  nday="Tuesday";
+if (nday==3)
+  nday="Wednesday";
+if (nday==4)
+  nday="Thursday";
+if (nday==5)
+  nday="Friday";
+if (nday==6)
+  nday="Saturday";
+ 
+var nmontharray=new Array("January","February","March","April","May","June","July","August","September","October","November","December")
+ 
+if (nyear<=99)
+  nyear= "19"+nyear;
+ 
+if ((nyear>99) && (nyear<2000))
+ nyear+=1900;
+ 
+document.clockform.clockspot.value=nday+", "+nmontharray[nmonth]+" "+ntoday+", "+nyear+" - "+nhours+":"+nmins+": "+nsecn+" "+AorP;
+setTimeout('startclock()',1000);
+}
+//-->
+</SCRIPT>
+ 
+<FORM name="clockform">
+<center>
+<input style="font-size:12px;font-weight:bold;color=#000000;background=#cccccc;" type="text" name=clockspot SIZE=50;>
+</FORM>
+<SCRIPT language="JavaScript">
+<!--
+startclock();
+//-->
+</SCRIPT>
+</div></form>
+</td>
+</table>
+ 
+<SCRIPT LANGUAGE="JavaScript">
+<!-- 
+//area square rectangle
+function sqrec()  {
+var length = prompt("Enter length.", "");
+var width = prompt("Enter width.", "");
+var sum = width*length;
+calculator.record.value+=('\n'+"SQ/REC | "+width+" x "+length+" | Area: "+sum+"")+'\n';
+}
+//area triangle
+function tri()  {
+var base = prompt ("Enter the base.", "");
+var height = prompt ("Enter the height.", "");
+var sum = base*(height*.5);
+calculator.record.value+=('\n'+"TRIANGLE | "+base+" x "+height+" | Area: "+sum+"")+'\n';
+}
+//area circle
+function cir()  {
+var diameter = prompt("Enter diameter:", "");
+var pi = 3.141592653589793238462643;
+var rad = (diameter/2);
+var sum = (rad*rad)*(pi);
+calculator.record.value+=('\n'+"CIRCLE | diameter "+diameter+" | Area: "+sum+"")+'\n';
+}
+//volume cube
+function cube()  {
+var length = prompt("Enter length.", "");
+var width = prompt("Enter width.", "");
+var height = prompt("Enter height.", "");
+var sum = length*width*height;
+calculator.record.value+=('\n'+"CUBE | "+length+" x "+width+" x "+height+" | Volume: "+sum+"")+'\n';
+}
+//volume sphere
+function sph()  {
+var diameter = prompt("Enter diameter:", "");
+var pi = 3.141592653589793238462643;
+var sum = (diameter/2)*(diameter/2)*(diameter/2)*(pi)*(4/3);
+calculator.record.value+=('\n'+"SPHERE | diameter "+diameter+" | Volume: "+sum+"")+'\n';
+}
+//volume cylinder
+function cyl()  {
+var diameter = prompt("Enter diameter.", "");
+var height = prompt ("Enter height.", "");
+var sum = (diameter*diameter*.78539759)*height;
+calculator.record.value+=('\n'+"CYLINDER | "+diameter+" x "+height+" | Volume: "+sum+"")+'\n';
+}
+function frac()  {
+var sum = ""
+                a = prompt("Enter a numerator:", "");
+                b = prompt("Enter a denominator:", "");
+                c = a/b;
+                sum = (c*1);
+ 
+calculator.record.value+=('\n'+"FRACTION | "+a+"/"+b+" = "+sum+"")+'\n';
+}
+function crunch() {
+a = prompt("Enter a number to be crunched:", "");
+b=eval(a*a);                        
+c=Math.pow(a, 3);
+d=Math.log(a);
+e=Math.sin(a);
+f=Math.cos(a);
+g=Math.tan(a);
+h=Math.sqrt(a);
+ 
+calculator.record.value+=('\n'+"CRUNCH # "+a+"")+'\n';
+calculator.record.value+=("Squared = "+b+"")+'\n';
+calculator.record.value+=("Cubed = "+c+"")+'\n';
+calculator.record.value+=("Logarithm = "+d+"")+'\n';
+calculator.record.value+=("Sin = "+e+"")+'\n';
+calculator.record.value+=("Cosine = "+f+"")+'\n';
+calculator.record.value+=("Tangent  = "+g+"")+'\n';
+calculator.record.value+=("Square Root  = "+h+"")+'\n';
+ 
+{
+input=a;
+origin=10;
+dest=16;
+base="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+c=0; Result="";
+for (t=1; t<=input.length; t++) {
+b=base.indexOf(input.substring(t-1,t));
+n=b*(Math.pow (origin, input.length-t));
+c+=n;
+}
+ 
+a=100;
+while (c < Math.pow (dest, a)) { a--; }
+ 
+while (a>-1) {
+e=Math.pow (dest, a);
+a--;
+d=((c-(c%e))/e)+1;
+c=c%e; Ciffer=base.substring(d-1, d); Result = Result + Ciffer;
+}
+calculator.record.value+=("Hexadecimal  = "+Result+"")+'\n';}
+{
+input=Result;
+origin=16;
+dest=2;
+base="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+c=0; Result="";
+for (t=1; t<=input.length; t++) {
+b=base.indexOf(input.substring(t-1,t));
+n=b*(Math.pow (origin, input.length-t));
+c+=n;
+}
+ 
+a=100;
+while (c < Math.pow (dest, a)) { a--; }
+ 
+while (a>-1) {
+e=Math.pow (dest, a);
+a--;
+d=((c-(c%e))/e)+1;
+c=c%e; Ciffer=base.substring(d-1, d); Result = Result + Ciffer;
+}
+calculator.record.value+=("Binary  = "+Result+"")+'\n';}
+                }
+// end hide -->
+</script>
+ 
+</table>
+<table width="736" cellpadding="2" bgcolor="#3399CC" border="3" bordercolordark="#333399" bordercolorlight="#cccccc">
+<td><center>
+<input style="font-size:9pt; height: 20px; width: 66px;color=ffffff;background=8b658b;" type="button" VALUE="#Cruncher" onmousedown=what('crunch');
+style="cursor:pointer;cursor:hand"ONCLICK="crunch();this.blur()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 22px;color=ffffff;background=8b658b;" type="button" VALUE="Pi" onmousedown=what('pi');
+style="cursor:pointer;cursor:hand"ONCLICK=calculator.display.value+='3.14159265';calculator.record.value+='3.14159265';this.blur()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 76px;color=ffffff;background=8b658b;" type="button" VALUE="Fraction/Dec" onmousedown=what('frac');
+style="cursor:pointer;cursor:hand"ONCLICK="frac();this.blur()"></td><td><center>
+<font size="1" color="ffffff">Sq. Area&nbsp;&nbsp;</font>
+<input style="font-size:9pt; height: 20px; width: 50px;color=ffffff;background=8b658b;" type="button" VALUE="Sq/Rec" onmousedown=what('sqrec');
+style="cursor:pointer;cursor:hand"ONCLICK="sqrec()";this.blur()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 54px;color=ffffff;background=8b658b;" type="button" VALUE="Triangle" onmousedown=what('tri');
+style="cursor:pointer;cursor:hand"ONCLICK="tri();this.blur()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 42px;color=ffffff;background=8b658b;" type="button" VALUE="Circle" onmousedown=what('cir');
+style="cursor:pointer;cursor:hand"ONCLICK="cir()";this.blur()">
+</td><td><center>
+<font size="1" color="ffffff">Cubic Volume&nbsp;&nbsp;</font>
+<input style="font-size:9pt; height: 20px; width: 40px;color=ffffff;background=8b658b;" type="button" VALUE="Cube" onmousedown=what('cube');
+style="cursor:pointer;cursor:hand"ONCLICK="cube();this.blur()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 48px;color=ffffff;background=8b658b;" type="button" VALUE="Sphere" onmousedown=what('sph');
+style="cursor:pointer;cursor:hand"ONCLICK="sph()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 56px;color=ffffff;background=8b658b;" type="button" VALUE="Cylinder" onmousedown=what('cyl');
+style="cursor:pointer;cursor:hand"ONCLICK="cyl();this.blur()">
+</table></form>
+

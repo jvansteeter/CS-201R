@@ -1,45 +1,22 @@
-<div onLoad="window.newgame()">
-
-<CENTER>
-<h1 align=center>Magic Squares</h1><p>
-<FORM>
-<table border=0 celpadding=0 cellspacing=10>
-<tr><td>
-<input type="button" value=" 1 " onClick="window.move(0)">
-<input type="button" value=" 2 " onClick="window.move(1)">
-<input type="button" value=" 3 " onClick="window.move(2)"><br>
-<input type="button" value=" 4 " onClick="window.move(3)">
-<input type="button" value=" 5 " onClick="window.move(4)">
-<input type="button" value=" 6 " onClick="window.move(5)"><br>
-<input type="button" value=" 7 " onClick="window.move(6)">
-<input type="button" value=" 8 " onClick="window.move(7)">
-<input type="button" value=" 0 " onClick="window.move(8)"><p>
-</td></td>
-<td valign=top>
-Put the numbers in order so that they read 1-8. <br>
-The 0 is the 'empty' place.  Click on any number <br>
-next to 0 and they will switch places.
-</td>
-</tr>
-<tr><td align=center>
-# of moves:<br>
-<input name="moves" size=7 value="0"> <p> 
-</td>
-<td align=center><br>
-<input type="submit" value="New Game" onClick="window.newgame()">
-</td>
-</tr>
-</table>
-</FORM>
-</CENTER>
+<!-- THREE STEPS TO INSTALL MAGIC SQUARES:
  
-<p><center>
-<font face="arial, helvetica" size="-2">Free JavaScripts provided<br>
-by <a href="http://javascriptsource.com">The JavaScript Source</a></font>
-</center><p>
-
+   1.  Paste the coding into the HEAD of your HTML document
+   2.  Put the onLoad event handler in the BODY tag
+   3.  Add the last code into the BODY of your HTML document  -->
+ 
+<!-- STEP ONE: Copy this code into the HEAD of your HTML document  -->
+ 
+<HEAD>
+ 
 <SCRIPT LANGUAGE="JavaScript">
  
+<!-- Original:  Roger Zeitel (rzeitel@mars.superlink.net) -->
+<!-- Web Site:  http://mars.superlink.net/rzeitel/games.html -->
+ 
+<!-- This script and many more are available free online at -->
+<!-- The JavaScript Source!! http://javascript.internet.com -->
+ 
+<!-- Begin
 function initArray() {
 this.length = initArray.arguments.length
 for (var i = 0; i < this.length; i++)
@@ -117,4 +94,50 @@ display(pos);
 }   
 // End -->
 </SCRIPT>
-</div>
+</HEAD>
+ 
+<!-- STEP TWO: Put this onLoad event handler in the BODY tag  -->
+ 
+<BODY onLoad="window.newgame()">
+ 
+<!-- STEP THREE: Add the last coding to the BODY of your HTML document -->
+ 
+<CENTER>
+<h1 align=center>Magic Squares</h1><p>
+<FORM>
+<table border=0 celpadding=0 cellspacing=10>
+<tr><td>
+<input type="button" value=" 1 " onClick="window.move(0)">
+<input type="button" value=" 2 " onClick="window.move(1)">
+<input type="button" value=" 3 " onClick="window.move(2)"><br>
+<input type="button" value=" 4 " onClick="window.move(3)">
+<input type="button" value=" 5 " onClick="window.move(4)">
+<input type="button" value=" 6 " onClick="window.move(5)"><br>
+<input type="button" value=" 7 " onClick="window.move(6)">
+<input type="button" value=" 8 " onClick="window.move(7)">
+<input type="button" value=" 0 " onClick="window.move(8)"><p>
+</td></td>
+<td valign=top>
+Put the numbers in order so that they read 1-8. <br>
+The 0 is the 'empty' place.  Click on any number <br>
+next to 0 and they will switch places.
+</td>
+</tr>
+<tr><td align=center>
+# of moves:<br>
+<input name="moves" size=7 value="0"> <p> 
+</td>
+<td align=center><br>
+<input type="submit" value="New Game" onClick="window.newgame()">
+</td>
+</tr>
+</table>
+</FORM>
+</CENTER>
+ 
+<p><center>
+<font face="arial, helvetica" size="-2">Free JavaScripts provided<br>
+by <a href="http://javascriptsource.com">The JavaScript Source</a></font>
+</center><p>
+ 
+<!-- Script Size:  3.34 KB  -->
