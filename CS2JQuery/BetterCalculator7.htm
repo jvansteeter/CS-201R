@@ -132,6 +132,258 @@ color=black;
 }
  
 </style>
+
+<center><font face="Verdana, Helvetica, Sans-serif">
+
+<br><br><br>
+<table width="428" cellpadding="1" bgcolor="#999999" border="2" bordercolordark="#333399" bordercolorlight="#0033FF">
+<td valign=top align=center>
+ 
+<table width="160" cellpadding="1" style="border: 1px solid ivory">
+ 
+<FORM name="calculator">
+ 
+<tr><td><center>
+ 
+<font size="2" color="ffffff">BetterCalculator 7</font>
+ 
+</td></tr>
+<tr><td valign=top align=center><input type="text" class="display" value="" name="display" value="input" size="20"><br>
+</td></tr></table>
+ 
+<table width="160" cellpadding="1" bgcolor="#8b8b83" border="1" bordercolordark="#66CCFF" bordercolorlight="#FFFFF0">
+ 
+<tr><td><input type="button" class="num" value="7" 
+onmousedown=what('7');
+onmouseup="calculator.display.value+='7';calculator.record.value+='7';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="8" 
+onmousedown=what('8');
+onmouseup="calculator.display.value+='8';calculator.record.value+='8';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="9" 
+onmousedown=what('9');
+onmouseup="calculator.display.value+='9';calculator.record.value+='9';this.blur()"></td>
+ 
+<td><input type="button" class="butn" value="x"
+onmousedown=what('x');
+onmouseup="calculator.display.value+='*';calculator.record.value+=' x ';this.blur()"></td></tr>
+ 
+<tr><td><input type="button" class="num" value="4" 
+onmousedown=what('4');
+onmouseup="calculator.display.value+='4';calculator.record.value+='4';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="5" 
+onmousedown=what('5');
+onmouseup="calculator.display.value+='5';calculator.record.value+='5';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="6" 
+onmousedown=what('6');
+onmouseup="calculator.display.value+='6';calculator.record.value+='6';this.blur()"></td>
+ 
+<td><input type="button" class="buttn" value="&#247;" 
+style="cursor:pointer;cursor:hand"onmousedown=what('/');
+onclick="calculator.display.value+='/';calculator.record.value+=' / ';this.blur()"></td></tr>
+ 
+<tr><td><input type="button" class="num" value="1" 
+onmousedown=what('1');
+onmouseup="calculator.display.value+='1';calculator.record.value+='1';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="2" 
+onmousedown=what('2');
+onmouseup="calculator.display.value+='2';calculator.record.value+='2';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="3" 
+onmousedown=what('3');
+onmouseup="calculator.display.value+='3';calculator.record.value+='3';this.blur()"></td>
+ 
+<td><input type="button" class="buttn" value="-" 
+onmousedown=what('-');
+onclick="calculator.display.value+='-';calculator.record.value+=' - ';this.blur()"></td></tr>
+ 
+<tr><td><input type="button" class="num" value="0" 
+onmousedown=what('0');
+onmouseup="calculator.display.value+='0';calculator.record.value+='0';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="00" 
+onmousedown=what('DZ');
+onmouseup="calculator.display.value+='00';calculator.record.value+='00';this.blur()"></td>
+ 
+<td><input type="button" class="num" value="&#149;" 
+onmousedown=what('.');
+onclick="this.blur();dec()"></td>
+ 
+<td><input type="button" class="buttnp" value="+" 
+onmousedown=what('+');
+onclick="calculator.display.value+='+';calculator.record.value+=' + ';this.blur()"></td></tr>
+ 
+<tr><td><input type="button" class="perc" value="%" 
+style="cursor:pointer;cursor:hand"onmousedown=what('%');
+onclick="perc();this.blur()"></td>
+ 
+<td><input type="button" class="del" value="Del" 
+style="cursor:pointer;cursor:hand"onmousedown=what('Del');
+onMouseUp="this.blur();deleteChar()"></td>
+ 
+<td><input type="button" class="clear" value="C" 
+onmousedown=what('c');
+onClick="this.blur();document.calculator.display.value='';document.calculator.record.value+='\n'"></td>
+ 
+<td><input type="button" class="buttnp" value="=" 
+onmousedown=what('eq');
+onMouseUp="this.blur();calc()"></td></tr></table>
+ 
+<table width="160" cellpadding="0" bgcolor="#8b8b83" border="1" bordercolor="#66CDAA">
+ 
+<td><input type="button" class="mem1" value="M1" 
+onmousedown=what('M1');
+onclick="mem1.value=calculator.display.value;this.blur()"></td>
+ 
+<td><input type="button" class="mem1" value="R1" 
+onmousedown=what('R1');
+onclick="calculator.record.value=calculator.record.value+'('+mem1.value+')';calculator.display.value=calculator.display.value+'('+(mem1.value)+')';this.blur()"></td>
+ 
+<td><input type="button" class="mem2" value="M2" 
+onmousedown=what('M2');
+onclick="mem2.value=calculator.display.value;this.blur()"></td>
+ 
+<td><input type="button" class="mem2" value="R2" 
+onmousedown=what('R2');
+onclick="calculator.record.value=calculator.record.value+'('+mem2.value+')';calculator.display.value=calculator.display.value+'('+(mem2.value)+')';this.blur()"></td></tr>
+ 
+<td><input type="button" class="mem1" value="M1+" 
+onmousedown=what('M1+');
+onmouseup="mem1.value=eval(mem1.value)+eval(calculator.display.value);this.blur()"></td>
+ 
+<td><input type="button" class="mem1" value="M1-" 
+onmousedown=what('M1-');
+onmouseup="mem1.value=eval(mem1.value)-eval(calculator.display.value);this.blur()"></td>
+ 
+<td><input type="button" class="mem2" value="M2+" 
+onmousedown=what('M2+');
+onmouseup="mem2.value=eval(mem2.value)+eval(calculator.display.value);this.blur()"></td>
+ 
+<td><input type="button" class="mem2" value="M2-" 
+onmousedown=what('M2-');
+onmouseup="mem2.value=eval(mem2.value)-eval(calculator.display.value);this.blur()"></td></tr>
+ 
+<td><input type="button" class="memcl" value="C1" 
+onmousedown=what('C1');
+onclick="mem1.value='0';this.blur()"></td>
+ 
+<td><input type="button" class="bmem" value="BM+" 
+onmousedown=what('BM+');
+onmouseup="mem1.value=eval(mem1.value)+eval(calculator.display.value);mem2.value=eval(mem2.value)+eval(calculator.display.value);this.blur()"></td>
+ 
+<td><input type="button" class="bmem" value="BM-" 
+onmousedown=what('BM-');
+onmouseup="mem1.value=eval(mem1.value)-eval(calculator.display.value);mem2.value=eval(mem2.value)-eval(calculator.display.value);this.blur()"></td>
+ 
+<td><input type="button" class="memcl" value="C2" 
+onmousedown=what('C2');
+onclick="mem2.value='0';this.blur()"></td></tr></table>
+ 
+<table width="210" cellpadding="1" bgcolor="#3CB371" border="2" bordercolor="#333399" >
+ 
+<form name="mem">
+<font face="Verdana, Helvetica, Sans-serif">
+<td align=left bgcolor=9FB6CD><font size=3 color=000000><b>&nbsp;M1 </b>
+<input type="text" class="memdisp" value="0" name="mem1" value="input" size="16"></font></td></tr>
+ 
+<tr><td align=left bgcolor=9FB6CD><font size=3 color=ffffff><b>&nbsp;M2 </b>
+<input type="text" class="memdisp" value="0" name="mem2" value="input" size="16"></font></td></tr></table>
+ 
+<td align=center valign=top bgcolor="#3399CC" border=0><font size="2" color="#000000">
+ 
+ 
+<textarea style="font-size: 18px;color=000000;background=cccccc;" type="text" value="" name="record" cols="44" rows="14">
+</textarea>
+ 
+<p align=center>
+<input style="font-size:11pt; height: 21px; width: 64px;color=000000;background=eead0e;" type="button" value="Clear All"
+style="cursor:pointer;cursor:hand"onmousedown=what('CA');
+onclick="calculator.record.value='';calculator.display.value='';mem1.value='0';mem2.value='0';principal.value='';apr.value='';years.value='';this.blur()">&nbsp;
+ 
+<input style="font-size:11pt; height: 21px; width: 94px;color=000000;background=eead0e;" type="button" value="Clear Record" 
+style="cursor:pointer;cursor:hand"onmousedown=what('CR');
+onclick="calculator.record.value='';calculator.record.value='';this.blur()">&nbsp;
+ 
+<input style="font-size:11pt; height: 21px; width: 46px;color=ffffff;background=8b658b;" type=button value="Copy" 
+style="cursor:pointer;cursor:hand" onmousedown=what('Copy');
+onClick="JavaScript:this.form.record.focus();this.form.record.select();initiatecopy();copyit();this.blur()">&nbsp;
+ 
+<input style="font-size:11pt; height: 21px; width: 94px;color=ffffff;background=007777;" type="button" value="New Window" 
+style="cursor:pointer;cursor:hand" onmousedown=what('NW');
+onclick="open_Calc('BetterCalculator7.htm','','756','600','');this.blur()">&nbsp;
+ 
+<input style="font-size:11pt; height: 21px; width: 42px;color=ffffff;background=8b658b;" type="button" value="Help" 
+style="cursor:help"onmousedown=what('Ab');
+onclick="alert('BetterCalculator 7 is freeware Javascript.\n\n\You DO NOT have to be on-line to use this Calculator once you save it\n\on your desktop. Remember to save the separate calendar script.\n\n\Left click to select a button.\nRight click on any button for help with that function.\n\n\All numeric and most functions may be input by using your keyboard.\n\n\If your computer has a numeric keypad, be sure to press your num lock button in order to use it.\n\n\If the calculator is not recognizing keypad input, then press the CLEAR key with your mouse. This should activate recognition from your keypad.\n\n\REMEMBER TO CLEAR the Display screen after each calculation!\n\Failure to do so may cause incorrect calculations.\n\n\Thank you and enjoy,\n\n\-Jim Anderson- \n');this.blur()">
+ 
+<p align=center>
+ 
+<form NAME="form">
+ 
+<table bgcolor="#9FB6CD" border="1"><tr><td>
+<div align=center><font size="1"><b>Loan<br>Amount</b></div></td><td>
+<div align=center><font size="1"><b>%<br>Rate</b></div></td><td>
+<div align=center><font size="1"><b>Term<br>Yrs</b></div></td><td>
+</td><td bgcolor="#999999">
+<div align=center><font size="2">
+<input style="font-size:11pt; height: 20px; width: 84px;color=ffffff;background=8b658b;;" type="button" value="Monthly Pmt"
+style="cursor:pointer;cursor:hand" onmousedown=what('LH');
+onclick="payment(this.form);this.blur()">
+</div></td><tr><td>
+<input style="font-size: 14px;color=000000;background=cccccc;" type="text" name=principal SIZE=12;
+OnChange="calculator.display.value='';calculator.record.value=''"></td><td>
+<input style="font-size: 14px;color=000000;background=cccccc;" type="text" name=apr SIZE=4;
+OnChange="calculator.display.value='';calculator.record.value=''"></td><td>
+<input style="font-size: 14px;color=000000;background=cccccc;" type="text" name=years SIZE=3;
+OnChange="calculator.display.value='';calculator.record.value=''"></td><td></td><td>
+<input style="font-size:11pt; height: 20px; width: 84px;color=ffffff;background=8b658b;;" type="button" value="Amortization"style="cursor:pointer;cursor:hand" onmousedown=what('LA');
+onclick="amort(this.form);this.blur()">
+</td></form>
+</div></td>
+
+<FORM name="clockform">
+<center>
+<input style="font-size:12px;font-weight:bold;color=#000000;background=#cccccc;" type="text" name=clockspot SIZE=50;>
+</FORM>
+<SCRIPT language="JavaScript">
+<!--
+startclock();
+//-->
+</SCRIPT>
+</div></form>
+</td>
+</table>
+
+</table>
+<table width="736" cellpadding="2" bgcolor="#3399CC" border="3" bordercolordark="#333399" bordercolorlight="#cccccc">
+<td><center>
+<input style="font-size:9pt; height: 20px; width: 66px;color=ffffff;background=8b658b;" type="button" VALUE="#Cruncher" onmousedown=what('crunch');
+style="cursor:pointer;cursor:hand"ONCLICK="crunch();this.blur()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 22px;color=ffffff;background=8b658b;" type="button" VALUE="Pi" onmousedown=what('pi');
+style="cursor:pointer;cursor:hand"ONCLICK=calculator.display.value+='3.14159265';calculator.record.value+='3.14159265';this.blur()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 76px;color=ffffff;background=8b658b;" type="button" VALUE="Fraction/Dec" onmousedown=what('frac');
+style="cursor:pointer;cursor:hand"ONCLICK="frac();this.blur()"></td><td><center>
+<font size="1" color="ffffff">Sq. Area&nbsp;&nbsp;</font>
+<input style="font-size:9pt; height: 20px; width: 50px;color=ffffff;background=8b658b;" type="button" VALUE="Sq/Rec" onmousedown=what('sqrec');
+style="cursor:pointer;cursor:hand"ONCLICK="sqrec()";this.blur()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 54px;color=ffffff;background=8b658b;" type="button" VALUE="Triangle" onmousedown=what('tri');
+style="cursor:pointer;cursor:hand"ONCLICK="tri();this.blur()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 42px;color=ffffff;background=8b658b;" type="button" VALUE="Circle" onmousedown=what('cir');
+style="cursor:pointer;cursor:hand"ONCLICK="cir()";this.blur()">
+</td><td><center>
+<font size="1" color="ffffff">Cubic Volume&nbsp;&nbsp;</font>
+<input style="font-size:9pt; height: 20px; width: 40px;color=ffffff;background=8b658b;" type="button" VALUE="Cube" onmousedown=what('cube');
+style="cursor:pointer;cursor:hand"ONCLICK="cube();this.blur()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 48px;color=ffffff;background=8b658b;" type="button" VALUE="Sphere" onmousedown=what('sph');
+style="cursor:pointer;cursor:hand"ONCLICK="sph()">&nbsp;
+<input style="font-size:9pt; height: 20px; width: 56px;color=ffffff;background=8b658b;" type="button" VALUE="Cylinder" onmousedown=what('cyl');
+style="cursor:pointer;cursor:hand"ONCLICK="cyl();this.blur()">
+</table></form>
+
 <script language="javascript" type="text/javascript">
 <!--
 function open_Calc(mypage,myname,w,h,features) {
@@ -484,8 +736,6 @@ function open_calendar(mypage,myname,w,h,features) {
 //-->
 </script>
  
-<center><font face="Verdana, Helvetica, Sans-serif">
- 
 <script language="javascript" type="text/javascript">
 <!--
 var mem1 = '0';
@@ -601,216 +851,6 @@ window.onkeypress=showkeypress;
 //-->
 </script>
  
-<br><br><br>
-<table width="428" cellpadding="1" bgcolor="#999999" border="2" bordercolordark="#333399" bordercolorlight="#0033FF">
-<td valign=top align=center>
- 
-<table width="160" cellpadding="1" style="border: 1px solid ivory">
- 
-<FORM name="calculator">
- 
-<tr><td><center>
- 
-<font size="2" color="ffffff">BetterCalculator 7</font>
- 
-</td></tr>
-<tr><td valign=top align=center><input type="text" class="display" value="" name="display" value="input" size="20"><br>
-</td></tr></table>
- 
-<table width="160" cellpadding="1" bgcolor="#8b8b83" border="1" bordercolordark="#66CCFF" bordercolorlight="#FFFFF0">
- 
-<tr><td><input type="button" class="num" value="7" 
-onmousedown=what('7');
-onmouseup="calculator.display.value+='7';calculator.record.value+='7';this.blur()"></td>
- 
-<td><input type="button" class="num" value="8" 
-onmousedown=what('8');
-onmouseup="calculator.display.value+='8';calculator.record.value+='8';this.blur()"></td>
- 
-<td><input type="button" class="num" value="9" 
-onmousedown=what('9');
-onmouseup="calculator.display.value+='9';calculator.record.value+='9';this.blur()"></td>
- 
-<td><input type="button" class="butn" value="x"
-onmousedown=what('x');
-onmouseup="calculator.display.value+='*';calculator.record.value+=' x ';this.blur()"></td></tr>
- 
-<tr><td><input type="button" class="num" value="4" 
-onmousedown=what('4');
-onmouseup="calculator.display.value+='4';calculator.record.value+='4';this.blur()"></td>
- 
-<td><input type="button" class="num" value="5" 
-onmousedown=what('5');
-onmouseup="calculator.display.value+='5';calculator.record.value+='5';this.blur()"></td>
- 
-<td><input type="button" class="num" value="6" 
-onmousedown=what('6');
-onmouseup="calculator.display.value+='6';calculator.record.value+='6';this.blur()"></td>
- 
-<td><input type="button" class="buttn" value="&#247;" 
-style="cursor:pointer;cursor:hand"onmousedown=what('/');
-onclick="calculator.display.value+='/';calculator.record.value+=' / ';this.blur()"></td></tr>
- 
-<tr><td><input type="button" class="num" value="1" 
-onmousedown=what('1');
-onmouseup="calculator.display.value+='1';calculator.record.value+='1';this.blur()"></td>
- 
-<td><input type="button" class="num" value="2" 
-onmousedown=what('2');
-onmouseup="calculator.display.value+='2';calculator.record.value+='2';this.blur()"></td>
- 
-<td><input type="button" class="num" value="3" 
-onmousedown=what('3');
-onmouseup="calculator.display.value+='3';calculator.record.value+='3';this.blur()"></td>
- 
-<td><input type="button" class="buttn" value="-" 
-onmousedown=what('-');
-onclick="calculator.display.value+='-';calculator.record.value+=' - ';this.blur()"></td></tr>
- 
-<tr><td><input type="button" class="num" value="0" 
-onmousedown=what('0');
-onmouseup="calculator.display.value+='0';calculator.record.value+='0';this.blur()"></td>
- 
-<td><input type="button" class="num" value="00" 
-onmousedown=what('DZ');
-onmouseup="calculator.display.value+='00';calculator.record.value+='00';this.blur()"></td>
- 
-<td><input type="button" class="num" value="&#149;" 
-onmousedown=what('.');
-onclick="this.blur();dec()"></td>
- 
-<td><input type="button" class="buttnp" value="+" 
-onmousedown=what('+');
-onclick="calculator.display.value+='+';calculator.record.value+=' + ';this.blur()"></td></tr>
- 
-<tr><td><input type="button" class="perc" value="%" 
-style="cursor:pointer;cursor:hand"onmousedown=what('%');
-onclick="perc();this.blur()"></td>
- 
-<td><input type="button" class="del" value="Del" 
-style="cursor:pointer;cursor:hand"onmousedown=what('Del');
-onMouseUp="this.blur();deleteChar()"></td>
- 
-<td><input type="button" class="clear" value="C" 
-onmousedown=what('c');
-onClick="this.blur();document.calculator.display.value='';document.calculator.record.value+='\n'"></td>
- 
-<td><input type="button" class="buttnp" value="=" 
-onmousedown=what('eq');
-onMouseUp="this.blur();calc()"></td></tr></table>
- 
-<table width="160" cellpadding="0" bgcolor="#8b8b83" border="1" bordercolor="#66CDAA">
- 
-<td><input type="button" class="mem1" value="M1" 
-onmousedown=what('M1');
-onclick="mem1.value=calculator.display.value;this.blur()"></td>
- 
-<td><input type="button" class="mem1" value="R1" 
-onmousedown=what('R1');
-onclick="calculator.record.value=calculator.record.value+'('+mem1.value+')';calculator.display.value=calculator.display.value+'('+(mem1.value)+')';this.blur()"></td>
- 
-<td><input type="button" class="mem2" value="M2" 
-onmousedown=what('M2');
-onclick="mem2.value=calculator.display.value;this.blur()"></td>
- 
-<td><input type="button" class="mem2" value="R2" 
-onmousedown=what('R2');
-onclick="calculator.record.value=calculator.record.value+'('+mem2.value+')';calculator.display.value=calculator.display.value+'('+(mem2.value)+')';this.blur()"></td></tr>
- 
-<td><input type="button" class="mem1" value="M1+" 
-onmousedown=what('M1+');
-onmouseup="mem1.value=eval(mem1.value)+eval(calculator.display.value);this.blur()"></td>
- 
-<td><input type="button" class="mem1" value="M1-" 
-onmousedown=what('M1-');
-onmouseup="mem1.value=eval(mem1.value)-eval(calculator.display.value);this.blur()"></td>
- 
-<td><input type="button" class="mem2" value="M2+" 
-onmousedown=what('M2+');
-onmouseup="mem2.value=eval(mem2.value)+eval(calculator.display.value);this.blur()"></td>
- 
-<td><input type="button" class="mem2" value="M2-" 
-onmousedown=what('M2-');
-onmouseup="mem2.value=eval(mem2.value)-eval(calculator.display.value);this.blur()"></td></tr>
- 
-<td><input type="button" class="memcl" value="C1" 
-onmousedown=what('C1');
-onclick="mem1.value='0';this.blur()"></td>
- 
-<td><input type="button" class="bmem" value="BM+" 
-onmousedown=what('BM+');
-onmouseup="mem1.value=eval(mem1.value)+eval(calculator.display.value);mem2.value=eval(mem2.value)+eval(calculator.display.value);this.blur()"></td>
- 
-<td><input type="button" class="bmem" value="BM-" 
-onmousedown=what('BM-');
-onmouseup="mem1.value=eval(mem1.value)-eval(calculator.display.value);mem2.value=eval(mem2.value)-eval(calculator.display.value);this.blur()"></td>
- 
-<td><input type="button" class="memcl" value="C2" 
-onmousedown=what('C2');
-onclick="mem2.value='0';this.blur()"></td></tr></table>
- 
-<table width="210" cellpadding="1" bgcolor="#3CB371" border="2" bordercolor="#333399" >
- 
-<form name="mem">
-<font face="Verdana, Helvetica, Sans-serif">
-<td align=left bgcolor=9FB6CD><font size=3 color=000000><b>&nbsp;M1 </b>
-<input type="text" class="memdisp" value="0" name="mem1" value="input" size="16"></font></td></tr>
- 
-<tr><td align=left bgcolor=9FB6CD><font size=3 color=ffffff><b>&nbsp;M2 </b>
-<input type="text" class="memdisp" value="0" name="mem2" value="input" size="16"></font></td></tr></table>
- 
-<td align=center valign=top bgcolor="#3399CC" border=0><font size="2" color="#000000">
- 
- 
-<textarea style="font-size: 18px;color=000000;background=cccccc;" type="text" value="" name="record" cols="44" rows="14">
-</textarea>
- 
-<p align=center>
-<input style="font-size:11pt; height: 21px; width: 64px;color=000000;background=eead0e;" type="button" value="Clear All"
-style="cursor:pointer;cursor:hand"onmousedown=what('CA');
-onclick="calculator.record.value='';calculator.display.value='';mem1.value='0';mem2.value='0';principal.value='';apr.value='';years.value='';this.blur()">&nbsp;
- 
-<input style="font-size:11pt; height: 21px; width: 94px;color=000000;background=eead0e;" type="button" value="Clear Record" 
-style="cursor:pointer;cursor:hand"onmousedown=what('CR');
-onclick="calculator.record.value='';calculator.record.value='';this.blur()">&nbsp;
- 
-<input style="font-size:11pt; height: 21px; width: 46px;color=ffffff;background=8b658b;" type=button value="Copy" 
-style="cursor:pointer;cursor:hand" onmousedown=what('Copy');
-onClick="JavaScript:this.form.record.focus();this.form.record.select();initiatecopy();copyit();this.blur()">&nbsp;
- 
-<input style="font-size:11pt; height: 21px; width: 94px;color=ffffff;background=007777;" type="button" value="New Window" 
-style="cursor:pointer;cursor:hand" onmousedown=what('NW');
-onclick="open_Calc('BetterCalculator7.htm','','756','600','');this.blur()">&nbsp;
- 
-<input style="font-size:11pt; height: 21px; width: 42px;color=ffffff;background=8b658b;" type="button" value="Help" 
-style="cursor:help"onmousedown=what('Ab');
-onclick="alert('BetterCalculator 7 is freeware Javascript.\n\n\You DO NOT have to be on-line to use this Calculator once you save it\n\on your desktop. Remember to save the separate calendar script.\n\n\Left click to select a button.\nRight click on any button for help with that function.\n\n\All numeric and most functions may be input by using your keyboard.\n\n\If your computer has a numeric keypad, be sure to press your num lock button in order to use it.\n\n\If the calculator is not recognizing keypad input, then press the CLEAR key with your mouse. This should activate recognition from your keypad.\n\n\REMEMBER TO CLEAR the Display screen after each calculation!\n\Failure to do so may cause incorrect calculations.\n\n\Thank you and enjoy,\n\n\-Jim Anderson- \n');this.blur()">
- 
-<p align=center>
- 
-<form NAME="form">
- 
-<table bgcolor="#9FB6CD" border="1"><tr><td>
-<div align=center><font size="1"><b>Loan<br>Amount</b></div></td><td>
-<div align=center><font size="1"><b>%<br>Rate</b></div></td><td>
-<div align=center><font size="1"><b>Term<br>Yrs</b></div></td><td>
-</td><td bgcolor="#999999">
-<div align=center><font size="2">
-<input style="font-size:11pt; height: 20px; width: 84px;color=ffffff;background=8b658b;;" type="button" value="Monthly Pmt"
-style="cursor:pointer;cursor:hand" onmousedown=what('LH');
-onclick="payment(this.form);this.blur()">
-</div></td><tr><td>
-<input style="font-size: 14px;color=000000;background=cccccc;" type="text" name=principal SIZE=12;
-OnChange="calculator.display.value='';calculator.record.value=''"></td><td>
-<input style="font-size: 14px;color=000000;background=cccccc;" type="text" name=apr SIZE=4;
-OnChange="calculator.display.value='';calculator.record.value=''"></td><td>
-<input style="font-size: 14px;color=000000;background=cccccc;" type="text" name=years SIZE=3;
-OnChange="calculator.display.value='';calculator.record.value=''"></td><td></td><td>
-<input style="font-size:11pt; height: 20px; width: 84px;color=ffffff;background=8b658b;;" type="button" value="Amortization"style="cursor:pointer;cursor:hand" onmousedown=what('LA');
-onclick="amort(this.form);this.blur()">
-</td></form>
-</div></td>
- 
 <SCRIPT language="JavaScript">
 <!--
 function startclock()
@@ -868,19 +908,6 @@ setTimeout('startclock()',1000);
 }
 //-->
 </SCRIPT>
- 
-<FORM name="clockform">
-<center>
-<input style="font-size:12px;font-weight:bold;color=#000000;background=#cccccc;" type="text" name=clockspot SIZE=50;>
-</FORM>
-<SCRIPT language="JavaScript">
-<!--
-startclock();
-//-->
-</SCRIPT>
-</div></form>
-</td>
-</table>
  
 <SCRIPT LANGUAGE="JavaScript">
 <!-- 
@@ -1003,30 +1030,3 @@ calculator.record.value+=("Binary  = "+Result+"")+'\n';}
                 }
 // end hide -->
 </script>
- 
-</table>
-<table width="736" cellpadding="2" bgcolor="#3399CC" border="3" bordercolordark="#333399" bordercolorlight="#cccccc">
-<td><center>
-<input style="font-size:9pt; height: 20px; width: 66px;color=ffffff;background=8b658b;" type="button" VALUE="#Cruncher" onmousedown=what('crunch');
-style="cursor:pointer;cursor:hand"ONCLICK="crunch();this.blur()">&nbsp;
-<input style="font-size:9pt; height: 20px; width: 22px;color=ffffff;background=8b658b;" type="button" VALUE="Pi" onmousedown=what('pi');
-style="cursor:pointer;cursor:hand"ONCLICK=calculator.display.value+='3.14159265';calculator.record.value+='3.14159265';this.blur()">&nbsp;
-<input style="font-size:9pt; height: 20px; width: 76px;color=ffffff;background=8b658b;" type="button" VALUE="Fraction/Dec" onmousedown=what('frac');
-style="cursor:pointer;cursor:hand"ONCLICK="frac();this.blur()"></td><td><center>
-<font size="1" color="ffffff">Sq. Area&nbsp;&nbsp;</font>
-<input style="font-size:9pt; height: 20px; width: 50px;color=ffffff;background=8b658b;" type="button" VALUE="Sq/Rec" onmousedown=what('sqrec');
-style="cursor:pointer;cursor:hand"ONCLICK="sqrec()";this.blur()">&nbsp;
-<input style="font-size:9pt; height: 20px; width: 54px;color=ffffff;background=8b658b;" type="button" VALUE="Triangle" onmousedown=what('tri');
-style="cursor:pointer;cursor:hand"ONCLICK="tri();this.blur()">&nbsp;
-<input style="font-size:9pt; height: 20px; width: 42px;color=ffffff;background=8b658b;" type="button" VALUE="Circle" onmousedown=what('cir');
-style="cursor:pointer;cursor:hand"ONCLICK="cir()";this.blur()">
-</td><td><center>
-<font size="1" color="ffffff">Cubic Volume&nbsp;&nbsp;</font>
-<input style="font-size:9pt; height: 20px; width: 40px;color=ffffff;background=8b658b;" type="button" VALUE="Cube" onmousedown=what('cube');
-style="cursor:pointer;cursor:hand"ONCLICK="cube();this.blur()">&nbsp;
-<input style="font-size:9pt; height: 20px; width: 48px;color=ffffff;background=8b658b;" type="button" VALUE="Sphere" onmousedown=what('sph');
-style="cursor:pointer;cursor:hand"ONCLICK="sph()">&nbsp;
-<input style="font-size:9pt; height: 20px; width: 56px;color=ffffff;background=8b658b;" type="button" VALUE="Cylinder" onmousedown=what('cyl');
-style="cursor:pointer;cursor:hand"ONCLICK="cyl();this.blur()">
-</table></form>
-

@@ -6,6 +6,7 @@ $(document).ready(function()
   var weatherApp;
   var bounceApp;
   var sliderApp;
+  var calcApp;
   $.ajax(
   {
       url : "https://api.github.com/repos/jvansteeter/CS-201R/git/blobs/8361c7c4ca28450e3e74c06798e0928b8a1e07f1",
@@ -43,6 +44,17 @@ $(document).ready(function()
     }
   })
 
+  $.ajax(
+  {
+    url : "https://api.github.com/repos/jvansteeter/CS-201R/git/blobs/9e06a10d7a9311b9f147885fd1f968fbec8b3aec",
+    dataType : "jsonp",
+    success : function(data)
+    {
+      var content = data['data']['content'];
+      calcApp = atob(content);
+    }
+  })
+
   var container = $('#container'); 
    $("#weatherbutton").click(function(e)
    {
@@ -73,10 +85,10 @@ $(document).ready(function()
       });
    }); // end click function
 
-   $("#sliderbutton").click(function(e)
+   $("#calcbutton").click(function(e)
    {
-    console.log(String(sliderApp));
-    container.html(String(sliderApp));
+    console.log(String(calcApp));
+    container.html(String(calcApp));
 
    }); // end click function
 
