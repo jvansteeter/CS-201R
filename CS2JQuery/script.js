@@ -46,7 +46,7 @@ $(document).ready(function()
 
   $.ajax(
   {
-    url : "https://api.github.com/repos/jvansteeter/CS-201R/git/blobs/9e06a10d7a9311b9f147885fd1f968fbec8b3aec",
+    url : "https://api.github.com/repos/jvansteeter/CS-201R/git/blobs/a1e28775da8ff076627a87930be1f77d0d44e65c",
     dataType : "jsonp",
     success : function(data)
     {
@@ -58,11 +58,8 @@ $(document).ready(function()
   var container = $('#container'); 
    $("#weatherbutton").click(function(e)
    {
-      console.log(container.html());
-      //$("#container").html("<p>Yep, definitely a test.</p>");
-      
-
       console.log(String(weatherApp));
+      container.html("");
       container.html(String(weatherApp));
       //console.log(container.html());
 
@@ -77,6 +74,7 @@ $(document).ready(function()
    $("#bouncebutton").click(function(e)
    {
       console.log(String(bounceApp));
+      container.html("");
       container.html(String(bounceApp));
 
       $('.button').each(function(e)
