@@ -7,7 +7,7 @@ $(document).ready(function()
   var theThing;
   $.ajax(
   {
-      url : "https://api.github.com/repos/jvansteeter/CS-201R/git/blobs/9297dfb20aef5ce99eabdfe4ead54739a8f95d3f",
+      url : "https://api.github.com/repos/jvansteeter/CS-201R/git/blobs/625479bcbe66ea6306ad79cbfbb2d8425a6e7d60",
       dataType : "jsonp",
       success : function(data)
       {
@@ -34,7 +34,7 @@ $(document).ready(function()
 
       $('.button').each(function(e)
       {
-        e.preventDefault();
+        
       })
         //var display = $('#weather').html(code);
         //console.log(display);
