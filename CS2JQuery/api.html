@@ -4,25 +4,39 @@
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script type='text/javascript' src='script.js'></script>
         <style>
-        #header 
+        #start-header 
         {
-            background-color : blue;
+            border-style : solid;
+            border-width : 5px;
+            margin : auto;
+            text-align : center;
         }
         #container
         {
             margin : auto;
         }
+        #bottom-div
+        {
+            align : bottom;
+            text-align : center;
+            float : bottom;
+            margin-bottom : 10px;
+        }
         </style>
     </head>
     <body>
-        <div id="header">
-            This is the Header <br>
+        <div id="start-header">
+            <h1>My simple API webpage</h1>
+            
             <input id="weatherbutton" class="button" type="submit" value="Weather App">
             <input id="bouncebutton" class="button" type="submit" value="Bounce Game">
             <input id="calcbutton" class="button" type="submit" value="Calculator">
         </div>
         <div id="container">
-            <p>this is a test</p>
+            
+        </div>
+        <div id="bottom-div">
+            <h6>These programs have been downloaded via the github api</h6>
         </div>
         
     </body>
