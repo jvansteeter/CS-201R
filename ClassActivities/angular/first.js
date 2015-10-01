@@ -6,9 +6,7 @@ firstApp.controller('FirstController', function($scope)
   $scope.heading = 'Message: ';
   $scope.upperMessage = function() 
   {
-      //$scope.first = $scope.first.toUpperCase();
-      //$scope.last = $scope.last.toLowerCase();
-    $scope.message = 'Hello ' + $scope.first.toUpperCase() +' '+ $scope.last.toUpperCase() + '!';
+        $scope.message = 'Hello ' + $scope.first.toUpperCase() +' '+ $scope.last.toUpperCase() + '!';
   };
   $scope.lowerMessage = function()
   {
