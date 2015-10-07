@@ -29,7 +29,7 @@
     <h1>Sign Up</h1>
 </div>
 
-    <div ng-hide="toHide" class="container" align="center">
+    <div id="sign-up-form" ng-hide="toHide" class="container col-md-offset-4 col-md-4" align="center">
 
         <form name="myForm" novalidate>
             <input name="username" ng-model="Username" placeholder="Username" size="44" type="text" required><br>
@@ -43,36 +43,37 @@
             <p class="error-text" ng-show="myForm.email.$invalid && !myForm.email.$pristine">Enter a valid email</p>
 
             <input ng-model="StreetAddress" placeholder="Address" size="44" type="text"><br>
-            <input ng-model="City" placeholder="City" type="text">
-            <input ng-model="State" placeholder="State" maxlength="2" size="1" type="text">
-            <input ng-model="Zip" placeholder="Zip Code" maxlength="5" size="5" type="text"><br>
+            <input  id="city" ng-model="City" placeholder="City" type="text" size="22">
+            <input  id="state" ng-model="State" placeholder="ST" maxlength="2" size="2" type="text">
+            <input id="zip" ng-model="Zip" placeholder="Zip" maxlength="5" size="5" type="text"><br>
 
             <input ng-model="Avatar" size="44" placeholder="Select a picture from the web for your Avatar!" type="text"><br>
-            <input ng-model="GithubUser" size="21" placeholder="GitHub Username" type="text">
-            <input ng-model="GithubRepo" size="21" placeholder="CS 201R Repo Name" type="text"><br>
+            <input id="git" ng-model="GithubUser" size="18" placeholder="GitHub Username" type="text">
+            <input  id="repo" ng-model="GithubRepo" size="18" placeholder="CS 201R Repo Name" type="text"><br>
 
-            <input ng-disabled="myForm.conf.$error.match || myForm.email.$invalid || myForm.username.$invalid" ng-click="onSubmit()"  type="submit">
+            <input class="btn-primary"ng-disabled="myForm.conf.$error.match || myForm.email.$invalid || myForm.username.$invalid" ng-click="onSubmit()"  type="submit">
         </form>
     </div>
-    <div class="row">
-      <div class="col-md-offset-2 col-md-4" ng-repeat="users in userProfile">
-        <div id="profile">
+
+      <div ng-repeat="users in userProfile">
+        <div align="center"id="profile">
             <img id="avatar" ng-src="{{ users.avatar }}"/>
               <h1 id="welcome"> Welcome, {{ users.username }}</h1>
               <h4 id="address"> {{ users.address }} </h4>
               <h4 id="email"> {{ users.email }} </h4>
         </div>
-        <div id="githubRepo">
+        <div align="center" id="githubRepo">
         <h3>{{ GithubUser }} {{ GithubRepo }} Repository</h3>
+      </div>
+        <div id="git-list" class="container col-md-offset-5 col-md-4">
             <ul ng-repeat="item in repoList">
                 <li><a href="{{item.url}}" target="_blank">{{ item.name }}</a></li>
-                <ul ng-repeat="child in {{item.children}}">
+                <ul class="list-unstyled" ng-repeat="child in {{item.children}}">
                     <li>{{ child }}</li>
                 </ul>
             </ul>
-        </div>
+          </div>
       </div>
-    </div>
 
 
 
@@ -80,6 +81,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="bootstrap.js"></script>
+    <script src="bootstrap.min.js"></script>
   </body>
 </html>
