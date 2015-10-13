@@ -46,14 +46,16 @@ http.createServer(function (req, res) {
      */
      res.writeHead(200);
      res.end(JSON.stringify(pokemon)); 
+     console.log("Pokemon");
 
   } else {
-
+    console.log("SRC");
     /**
      * Here is where we return all requests for files in our 'src' directory
      */
     fs.readFile(ROOT_DIR + urlObj.pathname, function (err, data) {
-      if (err) {
+      if (err) 
+      {
         res.writeHead(404);
         res.end(JSON.stringify(err));
         return;
