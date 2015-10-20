@@ -17,15 +17,13 @@
 <div id="login-div">
 	<form ng-submit="login()">
 	    <input type="text" ng-model="usernameInput" size="20" placeholder="Username"><br>
-	    <input type="text" ng-model="passwordInput" size="20" placeholder="Password"><br>
-	   
+	    <input type="password" ng-model="passwordInput" size="20" placeholder="Password"><br>
 	    <input type="submit" value="Login">
+	    <p style="color : red">{{ loginInfo }}</p>
 	</form>
 </div>
 
-<br>
-
-<p><button>Create Account</button></p>
+<p><button ng-click="createUser()">Create Account</button></p>
 
 </body>
 </html>

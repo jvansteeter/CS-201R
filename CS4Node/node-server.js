@@ -7,6 +7,7 @@ var port = 4000;
 http.createServer(function (req, res) 
 {
   var urlObj = url.parse(req.url, true, false);
+
   if (urlObj.pathname === '/validateUser') 
   {
     console.log("Validate User");
@@ -14,26 +15,67 @@ http.createServer(function (req, res)
     {
       if (err)
       {
-          response.writeHead(404);
-          response.end(JSON.stringify(err));
+          res.writeHead(404);
+          res.end(JSON.stringify(err));
           return;
       }
-      var users = JSON.stringify(data);
+      var users = JSON.parse(data);
       username = urlObj.query["u"];
       console.log(username);
-      console.log(data["user"]);
       res.writeHead(200);
       var result;
-      for(var i = 0; i < data.length; i++)
+      for(var i = 0; i < users.length; i++)
       {
-        if(data[i]['user'] === username)
+        if(users[i]['user'] === username)
         {
-          console.log(data[i]);
-          result = data[i];
+          console.log("result: " + users[i]);
+          result = users[i];
           break;
         }
       }
-      res.end(JSON.stringify(result);
+      res.end(JSON.stringify(result));
+    });
+  }
+  else if(urlObj.pathname === '/createUser')
+  {
+    console.log("creating User");
+
+    fs.readFile('users.txt', function(err,data)
+    {
+      if(err)
+      {
+        res.writeHead(404);
+        res.end(JSON.stringify(err));
+        return;
+      }
+      username = urlObj.query["u"];
+      secret = urlObj.query["p"];
+      console.log("user:" + username + " pass:" + secret);
+      var users = JSON.parse(data);
+      var found = false;
+      for(var i = 0; i < users.length; i++)
+      {
+        console.log(users[i]['user']);
+        if(username === users[i]['user'])
+          found = true;
+      }
+      if(!found)
+      {
+        users.push({user:username, password:secret});
+        var data = JSON.stringify(users);
+        fs.writeFile("users.txt", data, function(err)
+        {
+          if (err) throw err;
+          console.log("user created");
+        });
+        res.writeHead(200);
+        res.end("OK");
+      }
+      else
+      {
+        res.writeHead(200);
+        res.end("Username already Exists");
+      }
     });
   }
   else if(urlObj.pathname === '/createTestUser')
@@ -48,6 +90,8 @@ http.createServer(function (req, res)
       if (err) throw err;
       console.log("test user created");
     });
+    res.writeHead(200);
+    res.end("Test User Created");
   }
   else 
   {

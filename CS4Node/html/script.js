@@ -1,11 +1,11 @@
-var app = angular.module('myApp', []); 
+var app = angular.module('myApp', []);
 app.controller('siteCtrl', function($scope, $window, $http) 
 {
     $scope.usernameInput;
     $scope.passwordInput;
-    $scope.loginError;
     console.log("within module");
     $scope.todoInput;
+    $scope.loginInfo;
     $scope.todoList = [];
 
     $scope.createUser = function()
@@ -15,23 +15,56 @@ app.controller('siteCtrl', function($scope, $window, $http)
 
     $scope.login = function()
     {
-        /*var url = "http://hearts:4000/validateUser?u=" + $scope.usernameInput;
-        $http(
+        console.log("Within the login function");
+        var url = "validateUser?u=" + $scope.usernameInput;
+        console.log(url);
+        $http.get(url).success(function(data)
+        {
+            console.log("within get");
+            console.log(data);
+            if(data.length === 0)
+            {
+                $scope.loginInfo = "Invalid username";
+            }
+            else
+            {
+                if($scope.passwordInput === data['password'])
+                    $window.location.href = "todolist.html";
+                else
+                    $scope.loginInfo = "Invalid Password";
+            }
+        });
+        /*$http(
         {
             method: "GET",
-            url: url
+            url: url,
+            responseType: "jsonp"
         }).then(function sucessCallback(response)
         {
             console.log("Response: " + response);
+            $scope.loginInfo = response;
         }, function errorCallback(response)
         {
-            console.log(response);
+            console.log("error: " + response);
         });*/
-        console.log("Within the login function");
-        $scope.usernameInput= "Test1";
-        $scope.passwordInput = "Test2";
-        $window.location.href = "todolist.html";
+        //$scope.usernameInput= "Test1";
+        //$scope.passwordInput = "Test2";
+        //$window.location.href = "todolist.html";
     };
+
+    $scope.createUser = function()
+    {
+        var url = "createUser?u=" + $scope.usernameInput + "&p=" + $scope.passwordInput;
+        $http.get(url).success(function(data)
+        {
+            if(data === "OK")
+            {
+                $scope.loginInfo = "User created";
+            }
+            else
+                $scope.loginInfo = data;
+        });
+    }
 
     $scope.todoAdd = function() 
     {
