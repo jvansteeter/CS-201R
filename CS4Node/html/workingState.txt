@@ -1,0 +1,37 @@
+var fs = require('fs');
+var http = require('http');
+var url = require('url');
+var ROOT_DIR = "html";
+var port = 4000;
+
+http.createServer(function (req, res) 
+{
+  
+  var urlObj = url.parse(req.url, true, false);
+  if(urlObj.pathname === "/")
+  {
+    urlObj.pathname = "/index.html";
+  }
+  fs.readFile(ROOT_DIR + urlObj.pathname, function (err,data) 
+  {
+
+    // console.log("URL path "+urlObj.pathname);
+    // console.log("URL search "+urlObj.search);
+    // console.log("URL query "+urlObj.query["q"]);
+    // handle error
+    if (err) 
+    {
+      res.writeHead(404);
+      res.end(JSON.stringify(err));
+      return;
+    }
+
+    else 
+    {
+      // Serve static files
+      res.end(data);
+    }
+  });
+}).listen(port);
+
+console.log("Running server on port: " + port);
