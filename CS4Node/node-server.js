@@ -10,7 +10,7 @@ http.createServer(function (req, res)
 
   if (urlObj.pathname === '/validateUser') 
   {
-    console.log("Validate User");
+    //console.log("Validate User");
     fs.readFile('users.txt', function(err,data)
     {
       if (err)
@@ -21,14 +21,12 @@ http.createServer(function (req, res)
       }
       var users = JSON.parse(data);
       username = urlObj.query["u"];
-      console.log(username);
       res.writeHead(200);
       var result;
       for(var i = 0; i < users.length; i++)
       {
         if(users[i]['user'] === username)
         {
-          console.log("result: " + users[i]);
           result = users[i];
           break;
         }
@@ -38,10 +36,9 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/getTodoList')
   {
-    console.log("getting todo list");
+    //console.log("getting todo list");
 
     username = urlObj.query["u"];
-    console.log("username=" + username);
     fs.readFile("user_data/" + username + ".txt", function(err,data)
     {
       if(err)
@@ -57,20 +54,17 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/setTodoList')
   {
-    console.log("setting todo list");
+    //console.log("setting todo list");
 
     username = urlObj.query["u"];
-    console.log("username= " + username);
     var inData = "";
     req.on('data', function(chunk)
     {
-      console.log("chunk");
       inData += chunk;
     });
     req.on('end', function()
     {
       var todoList = JSON.parse(inData);
-      console.log(todoList);
       fs.writeFile("user_data/" + username + ".txt", JSON.stringify(todoList), function(err)
       {
         if(err) throw err;
@@ -81,7 +75,7 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/createUser')
   {
-    console.log("creating User");
+    //console.log("creating User");
 
     fs.readFile('users.txt', function(err,data)
     {
@@ -93,12 +87,10 @@ http.createServer(function (req, res)
       }
       username = urlObj.query["u"];
       secret = urlObj.query["p"];
-      console.log("user:" + username + " pass:" + secret);
       var users = JSON.parse(data);
       var found = false;
       for(var i = 0; i < users.length; i++)
       {
-        console.log(users[i]['user']);
         if(username === users[i]['user'])
           found = true;
       }
@@ -109,8 +101,9 @@ http.createServer(function (req, res)
         fs.writeFile("users.txt", data, function(err)
         {
           if (err) throw err;
-          console.log("user created");
-          fs.writeFile("user_data/" + username + ".txt", "[]", function(err)
+          var initTodo = '[{"todoText":"Create ToDo Account","done":true},' +
+          '{"todoText":"Try adding/removing items, logging out, and logging back in","done":false}]';
+          fs.writeFile("user_data/" + username + ".txt", initTodo, function(err)
           {
             if(err) throw err;
           });
@@ -127,7 +120,7 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/createTestUser')
   {
-    console.log("creating test User");
+    //console.log("creating test User");
     var user = [];
     user.push({user:"Joshua", password:"this"});
     user.push({user:"Bob", password:"that"});
@@ -135,7 +128,6 @@ http.createServer(function (req, res)
     fs.writeFile("users.txt", data, function(err)
     {
       if (err) throw err;
-      console.log("test user created");
     });
     res.writeHead(200);
     res.end("Test User Created");
@@ -144,14 +136,13 @@ http.createServer(function (req, res)
   {
     fs.readFile(ROOT_DIR + urlObj.pathname, function (err, data) 
     {
-      console.log("Login Page");
+      //console.log("Login Page");
       if (err) 
       {
         res.writeHead(404);
         res.end(JSON.stringify(err));
         return;
       }
-      //console.log("fetching other data");
       res.writeHead(200);
       res.end(data);
     });

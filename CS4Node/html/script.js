@@ -42,17 +42,13 @@ app.controller('loginCtrl', function($scope, $window, $http, Credentials)
 {
     $scope.usernameInput;
     $scope.passwordInput;
-    console.log("within module");
     $scope.loginInfo;
     
     $scope.login = function()
     {
-        console.log("Within the login function");
         var url = "validateUser?u=" + $scope.usernameInput;
-        console.log(url);
         $http.get(url).success(function(data)
         {
-            //console.log(data);
             if(data.length === 0)
             {
                 $scope.loginInfo = "Invalid username";
@@ -62,11 +58,9 @@ app.controller('loginCtrl', function($scope, $window, $http, Credentials)
                 if($scope.passwordInput === data['password'])
                 {
                     Credentials.setUsername($scope.usernameInput);
-                    console.log("setUsername= " + Credentials.getUsername());
                     url = "getTodoList?u=" + $scope.usernameInput;
                     $http.get(url).success(function(data)
                     {
-                        console.log("get todo list");
                         Credentials.setTodoList(data);
                     });
                     $window.location.href = "todolist.html";
@@ -76,10 +70,8 @@ app.controller('loginCtrl', function($scope, $window, $http, Credentials)
             }
         });
         url = "getTodoList?u=" + $scope.usernameInput;
-        console.log(url);
         $http.get(url).success(function(data)
         {
-            console.log("get todo list");
             Credentials.setTodoList(data);
         });
     };
@@ -110,7 +102,6 @@ app.controller('todoCtrl', function($scope, $http, Credentials)
         $scope.todoInput = "";
 
         var url = "setTodoList?u=" + Credentials.getUsername();
-        console.log(url);
         $http.post(url, $scope.todoList).success(function(data)
         {
             console.log("post=" + data);
@@ -127,7 +118,6 @@ app.controller('todoCtrl', function($scope, $http, Credentials)
         });
 
         var url = "setTodoList?u=" + Credentials.getUsername();
-        console.log(url);
         $http.post(url, $scope.todoList).success(function(data)
         {
             console.log("post=" + data);
