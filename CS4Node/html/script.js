@@ -1,18 +1,50 @@
 var app = angular.module('myApp', []);
-app.controller('siteCtrl', function($scope, $window, $http) 
+
+app.service('Credentials', function($window)
+{
+    var credService = {};
+
+    credService.getUsername = function()
+    {
+        //return username;
+        var myData = $window.sessionStorage.getItem("user");
+        return myData;
+    };
+    credService.getPassword = function()
+    {
+        //return password;
+        var myData = $window.sessionStorage.getItem("password");
+        return myData;
+    };
+    credService.getTodoList = function()
+    {
+        var data = $window.sessionStorage.getItem("todoList");
+        return JSON.parse(data);
+    };
+    credService.setUsername = function(name)
+    {
+        //username = name;
+        $window.sessionStorage.setItem("user", name);
+    };
+    credService.setPassword = function(secret)
+    {
+        //password = secret;
+        $window.sessionStorage.setItem("password", secret);
+    };
+    credService.setTodoList = function(todoList)
+    {
+        $window.sessionStorage.setItem("todoList", JSON.stringify(todoList));
+    }
+    return credService;
+});
+
+app.controller('loginCtrl', function($scope, $window, $http, Credentials) 
 {
     $scope.usernameInput;
     $scope.passwordInput;
     console.log("within module");
-    $scope.todoInput;
     $scope.loginInfo;
-    $scope.todoList = [];
-
-    $scope.createUser = function()
-    {
-
-    };
-
+    
     $scope.login = function()
     {
         console.log("Within the login function");
@@ -20,8 +52,7 @@ app.controller('siteCtrl', function($scope, $window, $http)
         console.log(url);
         $http.get(url).success(function(data)
         {
-            console.log("within get");
-            console.log(data);
+            //console.log(data);
             if(data.length === 0)
             {
                 $scope.loginInfo = "Invalid username";
@@ -29,27 +60,28 @@ app.controller('siteCtrl', function($scope, $window, $http)
             else
             {
                 if($scope.passwordInput === data['password'])
+                {
+                    Credentials.setUsername($scope.usernameInput);
+                    console.log("setUsername= " + Credentials.getUsername());
+                    url = "getTodoList?u=" + $scope.usernameInput;
+                    $http.get(url).success(function(data)
+                    {
+                        console.log("get todo list");
+                        Credentials.setTodoList(data);
+                    });
                     $window.location.href = "todolist.html";
+                }
                 else
                     $scope.loginInfo = "Invalid Password";
             }
         });
-        /*$http(
+        url = "getTodoList?u=" + $scope.usernameInput;
+        console.log(url);
+        $http.get(url).success(function(data)
         {
-            method: "GET",
-            url: url,
-            responseType: "jsonp"
-        }).then(function sucessCallback(response)
-        {
-            console.log("Response: " + response);
-            $scope.loginInfo = response;
-        }, function errorCallback(response)
-        {
-            console.log("error: " + response);
-        });*/
-        //$scope.usernameInput= "Test1";
-        //$scope.passwordInput = "Test2";
-        //$window.location.href = "todolist.html";
+            console.log("get todo list");
+            Credentials.setTodoList(data);
+        });
     };
 
     $scope.createUser = function()
@@ -64,38 +96,41 @@ app.controller('siteCtrl', function($scope, $window, $http)
             else
                 $scope.loginInfo = data;
         });
-    }
+    }    
+});
 
+app.controller('todoCtrl', function($scope, $http, Credentials)
+{
+    $scope.todoInput;
+    $scope.todoList = Credentials.getTodoList();
+    
     $scope.todoAdd = function() 
     {
         $scope.todoList.push({todoText:$scope.todoInput, done:false});
         $scope.todoInput = "";
+
+        var url = "setTodoList?u=" + Credentials.getUsername();
+        console.log(url);
+        $http.post(url, $scope.todoList).success(function(data)
+        {
+            console.log("post=" + data);
+        });
     };
 
     $scope.remove = function() 
     {
         var oldList = $scope.todoList;
         $scope.todoList = [];
-        angular.forEach(oldList, function(x) {
-            if (!x.done) $scope.todoList.push(x);
-        });
-    };
-/*
-    $scope.familyAdd = function() 
-    {
-        $scope.familyList.push({familyText:$scope.personInput + ", " + $scope.fatherInput + ", " + $scope.motherInput, done:false});
-        $scope.personInput = "";
-        $scope.fatherInput = "";
-        $scope.motherInput = "";
-    };
-
-    $scope.remove = function() 
-    {
-        var oldList = $scope.familyList;
-        $scope.familyList = [];
         angular.forEach(oldList, function(x) 
         {
-            if (!x.done) $scope.familyList.push(x);
+            if (!x.done) $scope.todoList.push(x);
         });
-    };*/
+
+        var url = "setTodoList?u=" + Credentials.getUsername();
+        console.log(url);
+        $http.post(url, $scope.todoList).success(function(data)
+        {
+            console.log("post=" + data);
+        });
+    };
 });

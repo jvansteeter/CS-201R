@@ -36,6 +36,49 @@ http.createServer(function (req, res)
       res.end(JSON.stringify(result));
     });
   }
+  else if(urlObj.pathname === '/getTodoList')
+  {
+    console.log("getting todo list");
+
+    username = urlObj.query["u"];
+    console.log("username=" + username);
+    fs.readFile("user_data/" + username + ".txt", function(err,data)
+    {
+      if(err)
+      {
+        res.writeHead(404);
+        res.end(JSON.stringify(err));
+        return;
+      }
+      var todoList = JSON.parse(data);
+      res.writeHead(200);
+      res.end(JSON.stringify(todoList));
+    });
+  }
+  else if(urlObj.pathname === '/setTodoList')
+  {
+    console.log("setting todo list");
+
+    username = urlObj.query["u"];
+    console.log("username= " + username);
+    var inData = "";
+    req.on('data', function(chunk)
+    {
+      console.log("chunk");
+      inData += chunk;
+    });
+    req.on('end', function()
+    {
+      var todoList = JSON.parse(inData);
+      console.log(todoList);
+      fs.writeFile("user_data/" + username + ".txt", JSON.stringify(todoList), function(err)
+      {
+        if(err) throw err;
+        res.writeHead(200);
+        res.end("OK");
+      });
+    });
+  }
   else if(urlObj.pathname === '/createUser')
   {
     console.log("creating User");
@@ -67,6 +110,10 @@ http.createServer(function (req, res)
         {
           if (err) throw err;
           console.log("user created");
+          fs.writeFile("user_data/" + username + ".txt", "", function(err)
+          {
+            if(err) throw err;
+          });
         });
         res.writeHead(200);
         res.end("OK");
