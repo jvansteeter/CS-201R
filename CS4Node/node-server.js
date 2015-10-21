@@ -110,7 +110,7 @@ http.createServer(function (req, res)
         {
           if (err) throw err;
           console.log("user created");
-          fs.writeFile("user_data/" + username + ".txt", "", function(err)
+          fs.writeFile("user_data/" + username + ".txt", "[]", function(err)
           {
             if(err) throw err;
           });

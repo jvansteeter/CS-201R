@@ -1,1 +1,1 @@
-[{"user":"Joshua","password":"this"},{"user":"Bob","password":"that"},{"user":"William","password":"king"},{"user":"Macquel","password":"cutie"}]
+[{"user":"Joshua","password":"this"},{"user":"Bob","password":"that"},{"user":"William","password":"king"}]
