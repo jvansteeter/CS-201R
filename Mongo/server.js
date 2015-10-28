@@ -6,10 +6,61 @@ var ROOT_DIR = "html/";
 http.createServer(function (req, res) {
   var urlObj = url.parse(req.url, true, false);
   // If this is our comments REST service
-  if(urlObj.pathname.indexOf("comment") !=-1) {
+  if(urlObj.pathname.indexOf("comment") !=-1) 
+  {
     console.log("comment route");
-    if(req.method === "POST") {
+    if(req.method === "POST") 
+    {
       console.log("POST comment route");
+      // First read the form data
+      var jsonData = "";
+      req.on('data', function (chunk) 
+      {
+        jsonData += chunk;
+      });
+      req.on('end', function () 
+      {
+        var reqObj = JSON.parse(jsonData);
+        console.log(reqObj);
+        console.log("Name: "+reqObj.Name);
+        console.log("Comment: "+reqObj.Comment);
+        // Now put it into the database
+        var MongoClient = require('mongodb').MongoClient;
+        MongoClient.connect("mongodb://localhost/weather", function(err, db) 
+        {
+          if(err) throw err;
+          db.collection('comments').insert(reqObj,function(err, records) 
+          {
+            console.log("Record added as "+records[0]._id);
+          });
+        // Send a response
+        res.writeHead(200);
+        res.end("");
+        });
+      });
+    } else if(req.method === "GET") 
+    {
+      console.log("In GET");
+      // Read all of the database entries and return them in a JSON array
+      var MongoClient = require('mongodb').MongoClient;
+      MongoClient.connect("mongodb://localhost/weather", function(err, db) 
+      {
+        if(err) throw err;
+        db.collection("comments", function(err, comments)
+        {
+          if(err) throw err;
+          comments.find(function(err, items)
+          {
+            items.toArray(function(err, itemArr)
+            {
+              console.log("Document Array: ");
+              console.log(itemArr);
+              res.writeHead(200);
+              res.end(JSON.stringify(itemArr));
+            });
+          });
+        });
+      }); 
     }
   } else {
    // Normal static file
@@ -23,4 +74,4 @@ http.createServer(function (req, res) {
       res.end(data);
     });
   }
-}).listen(80);
+}).listen(3000);
