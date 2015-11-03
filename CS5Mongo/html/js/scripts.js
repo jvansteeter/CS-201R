@@ -6,41 +6,28 @@ blogApp.service('Credentials', function($window)
 
     credService.getUsername = function()
     {
-        //return username;
         var myData = $window.sessionStorage.getItem("user");
         return myData;
     };
     credService.getPassword = function()
     {
-        //return password;
         var myData = $window.sessionStorage.getItem("password");
         return myData;
     };
-    /*credService.getTodoList = function()
-    {
-        var data = $window.sessionStorage.getItem("todoList");
-        return JSON.parse(data);
-    };*/
     credService.setUsername = function(name)
     {
-        //username = name;
         $window.sessionStorage.setItem("user", name);
     };
     credService.setPassword = function(secret)
     {
-        //password = secret;
         $window.sessionStorage.setItem("password", secret);
     };
-    /*credService.setTodoList = function(todoList)
-    {
-        $window.sessionStorage.setItem("todoList", JSON.stringify(todoList));
-    }*/
     return credService;
 });
 
-blogApp.controller('headerControl', function($scope) 
+blogApp.controller('headerControl', function($scope, Credentials) 
 {
-  var userName = "Cole"; // TODO get user.name from database
+  var userName = Credentials.getUsername();
   $scope.title = userName + "'s Blog";
 });
 
@@ -48,7 +35,7 @@ blogApp.controller('blogControl', function($scope, $window, $http, Credentials)
 {
   posts = [];
 
-  var post1 = { // TODO get this info from database
+  var post1 = { 
     title: "Welcome to the CS201R Blog",
     body: "Please feel free to check our new blog website.  Everything should be pretty straight forward.  You are currently on the homepage which displays all posts that have been posted to our server.  Unfortunately they currently are listed from oldest to newest, so any new posts you make will be shown at the bottom.",
     date: "31 October 2015",
@@ -64,25 +51,21 @@ blogApp.controller('blogControl', function($scope, $window, $http, Credentials)
   console.log(url);
   $http.get(url).success(function(data)
   {
-    console.log(data);
-    for(var k = 0; k < data.length; k++)
+    // console.log(data);
+    // var author = data[k]["_id"];
+    // var entries = data[k]['entry'];
+    for(var i = 0; i < data.length; i++)
     {
-      var author = data[k]["_id"];
-      var entries = data[k]['entry'];
-      for(var i = 0; i < entries.length; i++)
-      {
-        var post = {
-          "author" : author,
-          "title" : entries[i]['title'],
-          "date" : entries[i]['data'],
-          "tags" : entries[i]['tags'],
-          "body" : entries[i]['body']
-        };
-        posts.push(post);
-      }
+      var post = {
+        "author" : data[i]['author'],
+        "title" : data[i]['title'],
+        "date" : data[i]['date'],
+        "tags" : data[i]['tags'],
+        "body" : data[i]['body']
+      };
+      posts.push(post);
     }
   });
-  //$scope.posts.reverse();
   posts.push(post1);
   $scope.posts = posts;
 });
@@ -94,9 +77,9 @@ blogApp.controller('myPostsControl', function($scope, $window, $http, Credential
   console.log(url);
   $http.get(url).success(function(data)
   {
-    console.log(data);
-    var entries = data[0]['entry'];
-    if (entries.length === 0)
+    // console.log(data);
+    //var entries = data[0]['entry'];
+    if (data.length === 0)
     {
       var post = {
         "title" : "You Have No Entries",
@@ -105,16 +88,16 @@ blogApp.controller('myPostsControl', function($scope, $window, $http, Credential
       };
       $scope.posts.push(post);
     }
-    for(var i = 0; i < entries.length; i++)
+    for(var i = 0; i < data.length; i++)
     {
       var post = {
-        "title" : entries[i]['title'],
-        "date" : entries[i]['data'],
-        "tags" : entries[i]['tags'],
-        "body" : entries[i]['body']
+        "title" : data[i]['title'],
+        //"date" : data[i]['data'],
+        "tags" : data[i]['tags'],
+        "body" : data[i]['body']
       };
       $scope.posts.push(post);
-      $scope.posts.reverse();
+      //$scope.posts.reverse();
     }
   });
 });
@@ -153,11 +136,6 @@ blogApp.controller('loginControl', function($scope, $window, $http, Credentials)
         {
           Credentials.setUsername($scope.usernameInput);
           Credentials.setPassword($scope.passwordInput);
-          /*url = "getTodoList?u=" + $scope.usernameInput;
-          $http.get(url).success(function(data)
-          {
-              Credentials.setTodoList(data);
-          });*/
           $window.location.href = "index.html";
         }
         else if(data === "false")
@@ -165,26 +143,20 @@ blogApp.controller('loginControl', function($scope, $window, $http, Credentials)
         else
           $scope.loginInfo = "Unknown Error";
       });
-
-      /*url = "getTodoList?u=" + $scope.usernameInput;
-      $http.get(url).success(function(data)
-      {
-          Credentials.setTodoList(data);
-      });*/
     };
 
     $scope.createUser = function()
     {
-        var url = "createUser?u=" + $scope.usernameInput + "&p=" + $scope.passwordInput;
-        $http.get(url).success(function(data)
-        {
-            if(data === "OK")
-            {
-                $scope.loginInfo = "User created";
-            }
-            else
-                $scope.loginInfo = data;
-        });
+      var url = "createUser?u=" + $scope.usernameInput + "&p=" + $scope.passwordInput;
+      $http.get(url).success(function(data)
+      {
+          if(data === "OK")
+          {
+              $scope.loginInfo = "User created";
+          }
+          else
+              $scope.loginInfo = data;
+      });
     }    
 });
 

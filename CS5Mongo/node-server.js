@@ -84,7 +84,7 @@ http.createServer(function (req, res)
       db.collection("user", function(err, user)
       {
         if(err) throw err;
-        user.insert({ "_id" : username, "password" : password, entry : [] }, function(err, result)
+        user.insert({ "_id" : username, "password" : password/*, entry : [] */}, function(err, result)
         {
           assert.equal(err, null);
           // console.log(result);
@@ -118,10 +118,23 @@ http.createServer(function (req, res)
             // console.log("createNewUser connecting to database");
             if(err) throw err;
             assert.equal(null, err);
-            db.collection("user", function(err, user)
+            db.collection("entry", function(err, entry)
             {
               if(err) throw err;
-              user.update(
+              entry.insert(
+              { 
+                  "author" : username, 
+                  "title" : newPost['title'],
+                  "date" : newPost['date'],
+                  "tags" : newPost['tags'],
+                  "body" : newPost['body']
+              }, function(err, result)
+              {
+                assert.equal(err, null);
+                res.writeHead(200);
+                res.end("OK");
+                // console.log(result);
+              });/*user.update(
                 { "_id" : username, "password" : password },
                 { $push: {"entry": newPost}}, function(err, result)
                 {
@@ -129,7 +142,7 @@ http.createServer(function (req, res)
                   // console.log(result);
                   res.writeHead(200);
                   res.end("OK");
-                });
+                });*/
             });
           });
         });
@@ -166,10 +179,10 @@ http.createServer(function (req, res)
         MongoClient.connect("mongodb://localhost/blog_database", function(err, db) 
         {
           if(err) throw err;
-          db.collection("user", function(err, user)
+          db.collection("entry", function(err, user)
           {
             if(err) throw err;
-            user.find({"_id" : username }, function(err, items)
+            user.find({"author" : username }).sort({ "date" : -1 }, function(err, items)
             {
               items.toArray(function(err, itemArr)
               {
@@ -213,10 +226,10 @@ http.createServer(function (req, res)
         MongoClient.connect("mongodb://localhost/blog_database", function(err, db) 
         {
           if(err) throw err;
-          db.collection("user", function(err, user)
+          db.collection("entry", function(err, entry)
           {
             if(err) throw err;
-            user.find(function(err, items)
+            entry.find().sort({ "date" : -1 }, function(err, items)
             {
               items.toArray(function(err, itemArr)
               {
