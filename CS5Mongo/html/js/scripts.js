@@ -34,6 +34,7 @@ blogApp.controller('headerControl', function($scope, Credentials)
 blogApp.controller('blogControl', function($scope, $window, $http, Credentials) 
 {
   $scope.searchInput = "";
+  $scope.title = Credentials.getUsername();
   posts = [];
 
   var post1 = { 
@@ -103,6 +104,7 @@ blogApp.controller('myPostsControl', function($scope, $window, $http, Credential
 {
   $scope.posts = [];
   $scope.searchInput = "";
+  $scope.title = Credentials.getUsername();
 
   var url = "getMyPosts?u=" + Credentials.getUsername() + "&p=" + Credentials.getPassword();
   console.log(url);
@@ -235,6 +237,7 @@ blogApp.controller('newPostControl', function($scope, $window, $http, Credential
   $scope.tags = "";
   $scope.postBody = "";
   $scope.newPostInfo = "";
+  $scope.title = Credentials.getUsername();
   var time = new Date();
   var data = {};
 
