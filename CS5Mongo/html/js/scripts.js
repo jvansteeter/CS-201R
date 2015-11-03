@@ -37,7 +37,7 @@ blogApp.controller('blogControl', function($scope, $window, $http, Credentials)
 
   var post1 = { 
     title: "Welcome to the CS201R Blog",
-    body: "Please feel free to check our new blog website.  Everything should be pretty straight forward.  You are currently on the homepage which displays all posts that have been posted to our server.  Unfortunately they currently are listed from oldest to newest, so any new posts you make will be shown at the bottom.",
+    body: "Please feel free to check our new blog website.  Everything should be pretty straight forward.  You are currently on the homepage which displays all posts that have been posted to our server.  Click on 'My Posts' to see only posts you have made.",
     date: "31 October 2015",
     author: "System",
     tags: [
