@@ -33,6 +33,7 @@ blogApp.controller('headerControl', function($scope, Credentials)
 
 blogApp.controller('blogControl', function($scope, $window, $http, Credentials) 
 {
+  $scope.searchInput = "";
   posts = [];
 
   var post1 = { 
@@ -68,11 +69,41 @@ blogApp.controller('blogControl', function($scope, $window, $http, Credentials)
   });
   posts.push(post1);
   $scope.posts = posts;
+
+  $scope.search = function()
+  {
+    $scope.posts = [];
+    console.log("searching");
+    var tags = $scope.searchInput.split(' ');
+    var url = "search?u=" + Credentials.getUsername() + "&p=" + Credentials.getPassword();
+    for(var i = 0; i < tags.length; i++)
+    {
+      url += "&q=" + tags[i];
+    }
+    console.log(url);
+    $http.get(url).success(function(data)
+    {
+      console.log(data);
+      for(var i = 0; i < data.length; i++)
+      {
+        var post = {
+          "author" : data[i]['author'],
+          "title" : data[i]['title'],
+          "date" : data[i]['date'],
+          "tags" : data[i]['tags'],
+          "body" : data[i]['body']
+        };
+        $scope.posts.push(post);
+      }
+    });
+  };
 });
 
 blogApp.controller('myPostsControl', function($scope, $window, $http, Credentials) 
 {
   $scope.posts = [];
+  $scope.searchInput = "";
+
   var url = "getMyPosts?u=" + Credentials.getUsername() + "&p=" + Credentials.getPassword();
   console.log(url);
   $http.get(url).success(function(data)
@@ -100,6 +131,34 @@ blogApp.controller('myPostsControl', function($scope, $window, $http, Credential
       //$scope.posts.reverse();
     }
   });
+
+  $scope.search = function()
+  {
+    $scope.posts = [];
+    console.log("searching");
+    var tags = $scope.searchInput.split(' ');
+    var url = "searchMyPosts?u=" + Credentials.getUsername() + "&p=" + Credentials.getPassword();
+    for(var i = 0; i < tags.length; i++)
+    {
+      url += "&q=" + tags[i];
+    }
+    console.log(url);
+    $http.get(url).success(function(data)
+    {
+      console.log(data);
+      for(var i = 0; i < data.length; i++)
+      {
+        var post = {
+          "author" : data[i]['author'],
+          "title" : data[i]['title'],
+          "date" : data[i]['date'],
+          "tags" : data[i]['tags'],
+          "body" : data[i]['body']
+        };
+        $scope.posts.push(post);
+      }
+    });
+  };
 });
 
 blogApp.controller('loginControl', function($scope, $window, $http, Credentials) 

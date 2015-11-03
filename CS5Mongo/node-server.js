@@ -279,6 +279,70 @@ http.createServer(function (req, res)
       }
     });
   }
+  else if(urlObj.pathname === '/search')
+  {
+    username = urlObj.query["u"];
+    password = urlObj.query["p"];
+    var tag = [];
+    query = urlObj.query["q"];
+    if(!Array.isArray(query))
+    {
+      tag.push(query);
+    }
+    else
+      tag = query;
+    console.log(tag);
+
+    MongoClient.connect("mongodb://localhost/blog_database", function(err, db) 
+    {
+      if(err) throw err;
+      db.collection("entry", function(err, entry)
+      {
+        if(err) throw err;
+        entry.find({ tags : { $in : tag }}).sort({ "date" : -1 }, function(err, items)
+        {
+          items.toArray(function(err, itemArr)
+          {
+            console.log(itemArr);
+            res.writeHead(200);
+            res.end(JSON.stringify(itemArr));
+          });
+        });
+      });
+    });
+  }
+  else if(urlObj.pathname === '/searchMyPosts')
+  {
+    username = urlObj.query["u"];
+    password = urlObj.query["p"];
+    var tag = [];
+    query = urlObj.query["q"];
+    if(!Array.isArray(query))
+    {
+      tag.push(query);
+    }
+    else
+      tag = query;
+    console.log(tag);
+
+    MongoClient.connect("mongodb://localhost/blog_database", function(err, db) 
+    {
+      if(err) throw err;
+      db.collection("entry", function(err, entry)
+      {
+        if(err) throw err;
+        entry.find({ author : username, tags : { $in : tag }}).sort({ "date" : -1 }, function(err, items)
+        {
+          items.toArray(function(err, itemArr)
+          {
+            console.log(itemArr);
+            res.writeHead(200);
+            res.end(JSON.stringify(itemArr));
+          });
+        });
+      });
+    });
+  }
   else 
   {
     fs.readFile(ROOT_DIR + urlObj.pathname, function (err, data) 
