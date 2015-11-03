@@ -291,7 +291,7 @@ http.createServer(function (req, res)
     }
     else
       tag = query;
-    console.log(tag);
+    // console.log(tag);
 
     MongoClient.connect("mongodb://localhost/blog_database", function(err, db) 
     {
@@ -303,7 +303,7 @@ http.createServer(function (req, res)
         {
           items.toArray(function(err, itemArr)
           {
-            console.log(itemArr);
+            // console.log(itemArr);
             res.writeHead(200);
             res.end(JSON.stringify(itemArr));
           });
@@ -323,7 +323,7 @@ http.createServer(function (req, res)
     }
     else
       tag = query;
-    console.log(tag);
+    // console.log(tag);
 
     MongoClient.connect("mongodb://localhost/blog_database", function(err, db) 
     {
@@ -335,7 +335,7 @@ http.createServer(function (req, res)
         {
           items.toArray(function(err, itemArr)
           {
-            console.log(itemArr);
+            // console.log(itemArr);
             res.writeHead(200);
             res.end(JSON.stringify(itemArr));
           });

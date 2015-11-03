@@ -83,7 +83,7 @@ blogApp.controller('blogControl', function($scope, $window, $http, Credentials)
     console.log(url);
     $http.get(url).success(function(data)
     {
-      console.log(data);
+      // console.log(data);
       for(var i = 0; i < data.length; i++)
       {
         var post = {
@@ -145,7 +145,7 @@ blogApp.controller('myPostsControl', function($scope, $window, $http, Credential
     console.log(url);
     $http.get(url).success(function(data)
     {
-      console.log(data);
+      // console.log(data);
       for(var i = 0; i < data.length; i++)
       {
         var post = {
@@ -184,7 +184,7 @@ blogApp.controller('loginControl', function($scope, $window, $http, Credentials)
       console.log(url);
       $http.get(url).success(function(data)
       {
-        console.log(data);
+        // console.log(data);
         if(data.length === 0)
         {
           $scope.loginInfo = "Server Error";
