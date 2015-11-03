@@ -1,1 +1,1 @@
-[{"todoText":"Create ToDo Account","done":true},{"todoText":"Try adding/removing items, logging out, and logging back in","done":false}]
+[{"todoText":"Figure out a decent costume","done":false},{"todoText":"Mongo Lab","done":false}]
