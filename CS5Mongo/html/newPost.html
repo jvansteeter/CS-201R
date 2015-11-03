@@ -103,7 +103,7 @@
 										<input type="text" name="Tags" class="form-control" ng-model="tags">
 									</label>
 									<label>Post Body:
-										<textarea name="Post Body" class="form-control" ng-model="postBody" rows="4" cols="150"></textarea>
+										<textarea name="Post Body" class="form-control" ng-model="postBody" rows="20" cols="150"></textarea>
 									</label>
 									<button type="submit" class="btn btn-success">
 										Submit New Post
@@ -112,7 +112,7 @@
 								</div>
 							</form>
 
-              <h1>Your Posts:</h1>
+              <h1></h1>
               <div class="panel" ng-repeat="post in posts">
               	<h2>{{ post.title }}</h2>
                 <p>{{ post.body }}</p>

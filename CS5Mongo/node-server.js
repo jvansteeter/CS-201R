@@ -41,14 +41,14 @@ http.createServer(function (req, res)
 
   if (urlObj.pathname === '/validateUser') 
   {
-    console.log("/validateUser");
+    // console.log("/validateUser");
     //console.log("Validate User");
     username = urlObj.query["u"];
     password = urlObj.query["p"];
 
     validateUser(username, password, function(success)
     {
-      console.log("success= " + success);
+      // console.log("success= " + success);
       if(success === "true")
       {
         res.writeHead(200);
@@ -73,7 +73,7 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/createUser')
   {
-    console.log("creating User");
+    // console.log("creating User");
     username = urlObj.query["u"];
     password = urlObj.query["p"];
 
@@ -87,7 +87,7 @@ http.createServer(function (req, res)
         user.insert({ "_id" : username, "password" : password, entry : [] }, function(err, result)
         {
           assert.equal(err, null);
-          console.log(result);
+          // console.log(result);
         });
       });
     });
@@ -96,13 +96,13 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/createNewPost')
   {
-    console.log("creating new post");
+    // console.log("creating new post");
     username = urlObj.query["u"];
     password = urlObj.query["p"];
 
     validateUser(username, password, function(success)
     {
-      console.log("!!!success val= " + success);
+      // console.log("!!!success val= " + success);
       if(success === "true")
       {
         var inData = "";
@@ -115,7 +115,7 @@ http.createServer(function (req, res)
           var newPost = JSON.parse(inData);
           MongoClient.connect("mongodb://localhost/blog_database", function(err, db) 
           {
-            console.log("createNewUser connecting to database");
+            // console.log("createNewUser connecting to database");
             if(err) throw err;
             assert.equal(null, err);
             db.collection("user", function(err, user)
@@ -126,7 +126,7 @@ http.createServer(function (req, res)
                 { $push: {"entry": newPost}}, function(err, result)
                 {
                   if(err) throw err;
-                  console.log(result);
+                  // console.log(result);
                   res.writeHead(200);
                   res.end("OK");
                 });
@@ -153,13 +153,13 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/getMyPosts')
   {
-    console.log("getting my posts");
+    // console.log("getting my posts");
     username = urlObj.query["u"];
     password = urlObj.query["p"];
   
     validateUser(username, password, function(success)
     {
-      console.log("success= " + success);
+      // console.log("success= " + success);
       if(success === "true")
       {
         //-------------------------------------------------------------
@@ -173,7 +173,7 @@ http.createServer(function (req, res)
             {
               items.toArray(function(err, itemArr)
               {
-                console.log(itemArr);
+                // console.log(itemArr);
                 res.writeHead(200);
                 res.end(JSON.stringify(itemArr));
               });
@@ -200,13 +200,13 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/getAllPosts')
   {
-    console.log("getting my posts");
+    // console.log("getting my posts");
     username = urlObj.query["u"];
     password = urlObj.query["p"];
   
     validateUser(username, password, function(success)
     {
-      console.log("success= " + success);
+      // console.log("success= " + success);
       if(success === "true")
       {
         //-------------------------------------------------------------
@@ -220,7 +220,7 @@ http.createServer(function (req, res)
             {
               items.toArray(function(err, itemArr)
               {
-                console.log(itemArr);
+                // console.log(itemArr);
                 res.writeHead(200);
                 res.end(JSON.stringify(itemArr));
               });
@@ -243,45 +243,6 @@ http.createServer(function (req, res)
         res.writeHead(500);
         res.end(success);
       }
-    });
-  }
-  else if(urlObj.pathname === '/getTodoList')
-  {
-    //console.log("getting todo list");
-
-    username = urlObj.query["u"];
-    fs.readFile("user_data/" + username + ".txt", function(err,data)
-    {
-      if(err)
-      {
-        res.writeHead(404);
-        res.end(JSON.stringify(err));
-        return;
-      }
-      var todoList = JSON.parse(data);
-      res.writeHead(200);
-      res.end(JSON.stringify(todoList));
-    });
-  }
-  else if(urlObj.pathname === '/setTodoList')
-  {
-    //console.log("setting todo list");
-
-    username = urlObj.query["u"];
-    var inData = "";
-    req.on('data', function(chunk)
-    {
-      inData += chunk;
-    });
-    req.on('end', function()
-    {
-      var todoList = JSON.parse(inData);
-      fs.writeFile("user_data/" + username + ".txt", JSON.stringify(todoList), function(err)
-      {
-        if(err) throw err;
-        res.writeHead(200);
-        res.end("OK");
-      });
     });
   }
   else 
