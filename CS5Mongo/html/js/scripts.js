@@ -147,6 +147,16 @@ blogApp.controller('loginControl', function($scope, $window, $http, Credentials)
 
     $scope.createUser = function()
     {
+      if ($scope.usernameInput === "")
+      {
+        $scope.loginInfo = "Username is blank";
+        return;
+      }
+      if ($scope.passwordInput === "")
+      {
+        $scope.loginInfo = "Password is blank";
+        return;
+      }
       var url = "createUser?u=" + $scope.usernameInput + "&p=" + $scope.passwordInput;
       $http.get(url).success(function(data)
       {

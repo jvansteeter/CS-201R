@@ -84,15 +84,36 @@ http.createServer(function (req, res)
       db.collection("user", function(err, user)
       {
         if(err) throw err;
-        user.insert({ "_id" : username, "password" : password/*, entry : [] */}, function(err, result)
+        user.find({"_id" : username }, function(err, items)
+        {
+          items.toArray(function(err, itemArr)
+          {
+            if(itemArr.length === 0)
+            {
+              user.insert({ "_id" : username, "password" : password }, function(err, result)
+              {
+                assert.equal(err, null);
+                console.log("result=" + result);
+                res.writeHead(200);
+                res.end("OK");
+              });
+            }
+            else
+            {
+              res.writeHead(200);
+              res.end("Username already exists");
+            }
+          });
+        });
+        /*user.insert({ "_id" : username, "password" : password }, function(err, result)
         {
           assert.equal(err, null);
-          // console.log(result);
-        });
+          console.log("result=" + result);
+        });*/
       });
     });
-    res.writeHead(200);
-    res.end("OK");
+    // res.writeHead(200);
+    // res.end("OK");
   }
   else if(urlObj.pathname === '/createNewPost')
   {
