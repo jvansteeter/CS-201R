@@ -20,7 +20,6 @@ var validateUser = function(username, password, callback)
         {
           var response = "";
           //console.log(itemArr);
-          //res.writeHead(200);
           if(itemArr.length === 0)
             response = "Invalid Username";
           else if (password === itemArr[0]['password'])
@@ -28,7 +27,6 @@ var validateUser = function(username, password, callback)
           else
             response = "false";
           callback(response);
-          //res.end(response);
         });
       });
     });
@@ -41,14 +39,13 @@ http.createServer(function (req, res)
 
   if (urlObj.pathname === '/validateUser') 
   {
-    // console.log("/validateUser");
-    //console.log("Validate User");
+    console.log("/validateUser");
     username = urlObj.query["u"];
     password = urlObj.query["p"];
 
     validateUser(username, password, function(success)
     {
-      // console.log("success= " + success);
+      console.log("success= " + success);
       if(success === "true")
       {
         res.writeHead(200);
@@ -73,7 +70,7 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/createUser')
   {
-    // console.log("creating User");
+    console.log("creating User");
     username = urlObj.query["u"];
     password = urlObj.query["p"];
 
@@ -117,7 +114,7 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/createNewPost')
   {
-    // console.log("creating new post");
+    console.log("creating new post");
     username = urlObj.query["u"];
     password = urlObj.query["p"];
 
@@ -187,13 +184,13 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/getMyPosts')
   {
-    // console.log("getting my posts");
+    console.log("getting my posts");
     username = urlObj.query["u"];
     password = urlObj.query["p"];
   
     validateUser(username, password, function(success)
     {
-      // console.log("success= " + success);
+      console.log("success= " + success);
       if(success === "true")
       {
         //-------------------------------------------------------------
@@ -234,13 +231,13 @@ http.createServer(function (req, res)
   }
   else if(urlObj.pathname === '/getAllPosts')
   {
-    // console.log("getting my posts");
+    console.log("getting my posts");
     username = urlObj.query["u"];
     password = urlObj.query["p"];
   
     validateUser(username, password, function(success)
     {
-      // console.log("success= " + success);
+      console.log("success= " + success);
       if(success === "true")
       {
         //-------------------------------------------------------------
@@ -291,7 +288,7 @@ http.createServer(function (req, res)
     }
     else
       tag = query;
-    // console.log(tag);
+    console.log(tag);
 
     MongoClient.connect("mongodb://localhost/blog_database", function(err, db) 
     {
@@ -323,7 +320,7 @@ http.createServer(function (req, res)
     }
     else
       tag = query;
-    // console.log(tag);
+    console.log(tag);
 
     MongoClient.connect("mongodb://localhost/blog_database", function(err, db) 
     {
@@ -347,7 +344,7 @@ http.createServer(function (req, res)
   {
     fs.readFile(ROOT_DIR + urlObj.pathname, function (err, data) 
     {
-      //console.log("Login Page");
+      console.log("Login Page");
       if (err) 
       {
         res.writeHead(404);
