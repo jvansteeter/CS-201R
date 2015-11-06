@@ -14,3 +14,8 @@ var options = {
   app.get('/', function (req, res) {
     res.send("Get Index");
   });
+  app.use('/', express.static('./html', {maxAge: 60*60*1000}));
+  app.get('/getcity', function (req, res) {
+    console.log("In getcity route");
+    res.json([{city:"Price"},{city:"Provo"}]);
+  });
