@@ -9,7 +9,7 @@ $(document).ready(function(){
         var myobj = {Name:$("#Name").val(),Comment:$("#Comment").val()};
         jobj = JSON.stringify(myobj);
         $("#json").text(jobj);
-        var url = "https://52.27.162.246:3000/comment";
+        var url = "https://52.27.162.246/comment";
         jQuery.ajax ({
             url: url,
             type: "POST",
@@ -19,7 +19,7 @@ $(document).ready(function(){
               $("#done").append("Success");
             }
         });
-        var url = "https://52.27.162.246:3000/comments";
+        var url = "https://52.27.162.246/comments";
       	$.getJSON(url,function(data) 
       	{
       		console.log("within getJSON");
