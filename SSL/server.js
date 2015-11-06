@@ -5,7 +5,7 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var app = express();
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 var basicAuth = require('basic-auth-connect');
 var auth = basicAuth(function(user, pass) {
     return((user ==='cs201r')&&(pass === 'test'));
