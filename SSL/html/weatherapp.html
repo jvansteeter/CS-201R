@@ -18,7 +18,7 @@ Suggestion: <span id="txtHint">Empty</span>
 <script>
 $("#cityfield").keyup(function()
 {
-    var url = "http://localhost:8080/getcity.cgi?q="+$("#cityfield").val();
+    var url = "https://52.27.162.246/getcity.cgi?q="+$("#cityfield").val();
     $.getJSON(url,function(data)
     {
         var everything;
