@@ -1,0 +1,167 @@
+<html>
+<head>
+<title> Hints for using express </title>
+</head>
+<body>
+<h1> Hints for using <a href="http://expressjs.com/api.html">express</a> to make things easier </h1>
+In this lab you will use express to establish routes for your getcity and comments REST services.
+<p>
+The following steps may help you in implementing your express service.
+<ol>
+<li> First turn off the apache web server
+<pre>
+sudo /opt/bitnami/ctlscript.sh stop apache
+</pre>
+This will allow you to run your server on the default port (80)
+<li> Next get your https server working.
+<xmp>
+var express = require('express');
+var https = require('https');
+var http = require('http');
+var fs = require('fs');
+var url = require('url');
+var app = express();
+var options = {
+    host: '127.0.0.1',
+    key: fs.readFileSync('ssl/server.key'),
+    cert: fs.readFileSync('ssl/server.crt')
+};
+  http.createServer(app).listen(80);
+  https.createServer(options, app).listen(443);
+  app.get('/', function (req, res) {
+    res.send("Get Index");
+  });
+</xmp>
+
+You will need to create the "server.key" and "server.crt" before this code will work.  You can find instructions on page 158 after figure 8.2 on how to do this.
+
+<xmp>
+openssl genrsa -out server.pem 2048
+openssl req -new -key server.pem -out server.csr
+openssl x509 -req -days 365 -in server.csr -signkey server.pem -out server.crt
+mkdir ssl
+cp server* ssl
+mv ssl/server.pem ssl/server.key
+</xmp>
+
+Test your server to make sure you can connect with both http and https.  You will need to run it with sudo, since port 80 requires superuser permissions.
+<pre>
+sudo node server.js
+</pre>
+<li> Now you need to get your static server working to server your jquery html files.  This is really easy with express.
+<xmp>
+app.use('/', express.static('./html', {maxAge: 60*60*1000}));
+</xmp>
+Make sure you have copied over your html directory with your jquery html files.  Verify that you are able to access them through http and https.
+<li> Now implement the route to your "getcity" service.
+<xmp>
+  app.get('/getcity', function (req, res) {
+    console.log("In getcity route");
+    res.json([{city:"Price"},{city:"Provo"}]);
+  });
+</xmp>
+You can fill in the details from your node lab.
+<li> Now add the route for your "comment" service.  You will need to add middleware to parse your body.
+<xmp>
+npm install body-parser
+</xmp>
+Now add the routes for both GET and POST
+<xmp>
+var express = require('express');
+var bodyParser = require('body-parser');
+...
+var app = express();
+app.use(bodyParser());
+...
+  app.get('/comment', function (req, res) {
+    console.log("In comment route");
+  });
+  app.post('/comment', function (req, res) {
+    console.log("In POST comment route");
+    console.log(req.body);
+    res.status(200);
+    res.end();
+  });
+</xmp>
+<li> Now lets finish the POST interface of the comment service
+You will notice that the object parsed by the middleware body_parser does not look right
+<xmp>
+{ '{"Name":"Mickey","Comment":"Hello"}': '' }
+</xmp>
+The body_parser expects the content type field to be set to json, so lets make a change to our jquery code.  Change
+<xmp>
+        $.post(url,jobj,function(data,textStatus) {
+          $("#done").append(textStatus);
+        });
+</xmp>
+to
+<xmp>
+        jQuery.ajax ({
+            url: url,
+            type: "POST",
+            data: jobj,
+            contentType: "application/json; charset=utf-8",
+            success: function(){
+              $("#done").append("Success");
+            }
+        });
+
+</xmp>
+The raw ajax call allows you to change the contentType so that your express middleware will be able to parse it correctly.  
+You can access the object fields through the body object.
+<xmp>
+    console.log(req.body.Name);
+    console.log(req.body.Comment);
+</xmp>
+
+You can insert your code from the mongo lab to insert the comment into mongodb.
+
+<li> Now lets finish the GET interface of the comment service.
+The data you will get back from mongo is an array of objects, so lets declare a variable with this data to send back.
+<xmp>
+    resarray = [ { Name: 'Mickey', Comment: 'Hello',
+        _id: '54f53d5ebf89e6100c2180da' },
+      { Name: 'Mark', Comment: 'This is a comment',
+        _id: '54f53e21801a52330c04be8a' }
+      ]
+    res.json(resarray);
+
+</xmp>
+res.json converts the array to JSON format and sends it back.
+<li> The last functionality to implement is authentication.  We will implement simple authentication described in the chapter on express middleware, and will leave the more complex issues until angular.  First require the module, then create a callback that will check the password.
+<p>
+First install the auth module
+<xmp>
+npm install basic-auth-connect
+</xmp>
+<xmp>
+  var basicAuth = require('basic-auth-connect');
+  var auth = basicAuth(function(user, pass) {
+    return((user ==='cs201r')&&(pass === 'test'));
+  });
+</xmp>
+Now add this authentication middleware to the post route.  In this case we will allow anyone to read the comments, but will require authentication to add new posts.
+<xmp>
+ app.post('/comment', auth, function (req, res) {
+    console.log("In POST comment route");
+    console.log(req.user);
+    console.log("Remote User");
+    console.log(req.remoteUser);
+    res.status(200);
+    res.end();
+  });
+
+</xmp>
+<li>
+In case you really want to develop an application quickly, express will do a lot for you.
+<pre>
+express myapp
+cd myapp
+npm install
+npm start
+</pre>
+
+
+</ol>
+</body>
+</html>
