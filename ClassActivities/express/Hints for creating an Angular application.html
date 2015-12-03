@@ -1,0 +1,385 @@
+
+<!-- saved from url=(0058)http://bioresearch.byu.edu/cs260/express/angularhints.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title> Hints for creating an Angular application</title>
+</head>
+<body>
+<h1> Hints for creating an Angular application</h1>
+In this tutorial you will create an Angular application that will implement comments for a blog.  You will allow the users to create comments and then upvote other people's comments. Much of this tutorial is taken from <a href="https://thinkster.io/mean-stack-tutorial/">this Flapper News</a> site and you may want to look at it if you get stuck.
+
+The following steps will use express to set up your project and then build the front and back end in the project.
+<ol>
+<li> First create an express project
+<pre>express comment
+cd comment
+npm install
+npm start
+</pre>
+This will start a web server on port 3000.  Take a look at the file in bin/www which is a node.js app that is run with "npm start".  Files in the "public" directory will be served by the node server.
+</li><li> Lets get started with a simple Angular application with the following view "index.html" that we will create inside of the "public" directory.
+<xmp>
+<html>
+<head>
+  <title>Comments</title>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+  <script src="javascripts/app.js"></script>
+</head>
+<body ng-app="comment" ng-controller="MainCtrl">
+  <div>
+    {{test}}
+  </div>
+</body>
+</html>
+</xmp>
+Now create the controller in "public/javascripts/app.js".
+<xmp>
+angular.module('comment', [])
+.controller('MainCtrl', [
+  '$scope',
+  function($scope){
+    $scope.test = 'Hello world!';
+  }
+]);
+</xmp>
+You now have your hello world Angular app.
+</li><li> Now we are going to modify the controller to include some new model data with comments.
+<xmp>
+    $scope.comments = [
+      'Comment 1',
+      'Comment 2',
+      'Comment 3',
+      'Comment 4',
+      'Comment 5'
+    ];
+</xmp>
+And add some Angular code to display the comments.
+<xmp>
+<div ng-repeat="comment in comments">
+{{comment}}
+</div>
+</xmp>
+</li><li> Now lets add upvotes to our comments and make each array element an object.
+<xmp>
+    $scope.comments = [
+      {title:'Comment 1', upvotes:5},
+      {title:'Comment 2', upvotes:6},
+      {title:'Comment 3', upvotes:1},
+      {title:'Comment 4', upvotes:4},
+      {title:'Comment 5', upvotes:3}
+    ];
+</xmp>
+And change the view to show upvotes.
+<xmp>
+<div ng-repeat="comment in comments">
+{{comment.title}} - upvotes: {{comment.upvotes}}
+</div>
+</xmp>
+</li><li> Of course, you want to sort the comments based on popularity, so include a <a href="https://code.angularjs.org/1.2.19/docs/api/ng/filter">filter</a>.
+<xmp>
+<div ng-repeat="comment in comments | orderBy: '-upvotes'">
+{{comment.title}} - upvotes: {{comment.upvotes}}
+</div>
+</xmp>
+</li><li> Now that we have the list displayed, it would be nice to add comments to the list.  First create a controller function that will add an object to the comments array.
+<xmp>
+    $scope.addComment = function() {
+      $scope.comments.push({title:'A new comment',upvotes:0});
+    };
+</xmp>
+Then add a button to call the function in your html file.
+<xmp>
+<button ng-click="addComment()">Add Comment</button>
+</xmp>
+Make sure everything is working.  You should see the new comment in your list.
+</li><li> Now we want to allow the user to enter custom comment data.  So create a <a href="https://docs.angularjs.org/guide/forms">form</a>.
+<xmp>
+  <form ng-submit="addComment()">
+    <input type="text" ng-model="formContent"></input>
+    <button type="submit">Add Comment</button>
+  </form>
+</xmp>
+And modify the controller to get the data from the model.  The controller will also clear the form.
+<xmp>
+    $scope.addComment = function() {
+      $scope.comments.push({title:$scope.formContent,upvotes:0});
+      $scope.formContent='';
+    };
+</xmp>
+</li><li> Now that we have the ability to add comments, we ought to allow the user to upvote the comments he likes.  Next to each comment, we will place a click-able character that the user can select to increment the upvotes.  Notice that the parameter to incrementUpvotes is passed by reference so the list is automatically rearranged.
+<p>
+First, modify the html to have the clickable character
+</p><xmp>
+  <div ng-repeat="comment in comments | orderBy: '-upvotes'">
+    <span ng-click="incrementUpvotes(comment)">^</span>
+    {{comment.title}} - upvotes: {{comment.upvotes}}
+  </div>
+</xmp>
+Then add the function to the controller app.js
+<xmp>
+    $scope.incrementUpvotes = function(comment) {
+      comment.upvotes += 1;
+    };
+</xmp>
+The click in the view called the controller which changed the model which then updated the order in the view.
+</li><li> Now lets make things look a little better.  Use the bootstrap css to spruce things up.
+<xmp>
+<html>
+<head>
+  <title>Comments</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+  <script src="javascripts/app.js"></script>
+
+</head>
+<body ng-app="comment" ng-controller="MainCtrl">
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<div class="page-header"> 
+  <h1>Comments </h1>
+</div>
+
+  <form ng-submit="addComment()" style = "margin-top30px;">
+    <input type="text" ng-model="formContent"></input>
+    <button type="submit">Add Comment</button>
+  </form>
+  <div>
+    {{test}}
+  </div>
+  <div ng-repeat="comment in comments | orderBy: '-upvotes'">
+    <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span>
+    {{comment.title}} - upvotes: {{comment.upvotes}}
+  </div>
+</div>
+</div>
+</body>
+</html>
+</xmp>
+</li><li>  Test the front end to make sure everything is working so we can attach the back end.
+<p>
+If you are stuck, you might want to refer to my working front end <a href="http://bioresearch.byu.edu/cs260/express/example/index.html.txt">index.html</a> and <a href="http://bioresearch.byu.edu/cs260/express/example/app.js.txt">app.js</a>
+
+</p></li><li> Now we will install Mongoose which will provide schemas on top of mongodb.
+<xmp>
+npm install --save mongoose
+</xmp>
+The --save flag updates the packages.json file with mongoose so you can easily restore them with a "npm install" command.
+<p>
+You may get an error saying something like
+</p><pre>lib/kerberos.h:5:27: fatal error: gssapi/gssapi.h: No such file or directory
+</pre>
+This is a good time to figure out how to install packages.  If you google for this error, you will find that the kerberos library is not installed.  To fix this use:
+<pre>sudo apt-get install libkrb5-dev
+</pre>
+Then rebuild your npm modules
+<pre>sudo npm rebuild
+</pre>
+</li><li> Lets look at the express project structure</li>
+The node project created by express has the following directory structure:
+<ul>
+<li> app.js - This file is the launching point for our app. We use it to import all other server
+files including modules, configure routes, open database connections, and just about
+anything else we can think of.
+</li><li>bin/ - This directory is used to contain useful executable scripts. By default it contains
+one called www . A quick peak inside reveals that this script actually includes app.js
+and when invoked, starts our Node.js server.
+</li><li>node_modules - This directory is home to all external modules used in the project. As
+mentioned earlier, these modules are usually installed using npm install . You will
+most likely not have to touch anything here.
+</li><li>package.json - This file defines a JSON object that contains various properties of our
+project including things such as name and version number. It can also defined what
+versions of Node are required and what modules our project depends on. A list of
+possible options can be found in the npm documentation.
+</li><li>public/ - As the name alludes to, anything in this folder will be made publicly available
+by the server. This is where we are going to store JavaScript, CSS, images, and templates
+we want the client to use.
+</li><li>routes/ - This directory houses our Node controllers and is usually where most of the
+backend code will be stored.
+</li><li>views/ - If we were not using Angular, we could generate interactive views here.
+</li></ul>
+<li>In addition to the above files structure, we are going to add one more folder.
+Create a new folder called "models":
+<xmp>
+mkdir models
+</xmp>
+This folder will contain our Mongoose schema definitions.
+</li><li> Now we are going to set up the mongo database for the node.js backend.  We will use <a href="http://mongoosejs.com/">mongoose</a> to set up the schema.  Chapter 16 of the book discusses mongoose in detail.  Add the following code to the top of your app.js file [right after require('body-parser')] to connect to the mongod.  Make sure that mongod is running on your instance.
+<xmp>
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/comments');
+</xmp>
+</li><li> Now create the file "Comments.js" in the models directory with the following content.
+<xmp>
+var mongoose = require('mongoose');
+var CommentSchema = new mongoose.Schema({
+  title: String,
+  upvotes: {type: Number, default: 0},
+});
+mongoose.model('Comment', CommentSchema);
+</xmp>
+Now add the model to your app.js file right after the mongoose.connect call.
+<xmp>
+require('./models/Comments');
+</xmp>
+</li><li> Now we need to open up REST routes to the database.  We want the user to be able to perform the following tasks:
+<ul>
+<li>view comments 
+</li><li>add a comment
+</li><li>upvote a comment
+</li></ul>
+These tasks correspond to the following routes:
+<ul>
+<li> GET /comments - return a list of comments
+</li><li> POST /comments - create a new comment
+</li><li> PUT /comments/:id/upvote - upvote a comment, notice we use the comment ID in the URL
+</li></ul>
+Lets start be opening up a GET route in routes/index.js
+<xmp>
+var mongoose = require('mongoose');
+var Comment = mongoose.model('Comment');
+
+router.get('/comments', function(req, res, next) {
+  Comment.find(function(err, comments){
+    if(err){ return next(err); }
+    res.json(comments);
+  });
+});
+</xmp>
+Notice that the Comment variable refers to the Comment model we defined earlier.
+<p>
+Before we can test that the route works, we need data in the mongo database, so lets create a POST route in routes/index.js 
+</p><xmp>
+router.post('/comments', function(req, res, next) {
+  var comment = new Comment(req.body);
+  comment.save(function(err, comment){
+    if(err){ return next(err); }
+    res.json(comment);
+  });
+});
+</xmp>
+Notice that we created a Comment object from the req.body and saved it to the mongo database using the mongoose connection to the mongo database.
+</li><li> Now lets test the routes using curl from your instance.  First type cntrl-C to kill your server, then "npm start" to start it up again.
+<xmp>
+curl --data 'title=test' http://localhost:3000/comments
+</xmp>
+This should return something like this:
+<xmp>
+$ curl --data 'title=test' http://localhost:3000/comments
+{"__v":0,"title":"test","_id":"563ba5ac1a761cf149c0b258","upvotes":0}
+</xmp>
+Now lets test the GET route.
+<xmp>
+curl http://localhost:3000/comments
+</xmp>
+Should return something like this
+<xmp>
+[{"_id":"563ae37a13190ba93fc96a34","title":"test","__v":0,"upvotes":1}]
+</xmp>
+You can also access the GET route through the URL in your browser.  Test it to make sure everything is working.
+</li><li> Notice that the upvote REST interface requires us to find a particular comment before operating on it.  In order to make this easier, we can create a route to preload a comment object in routes/index.js using the <a href="http://expressjs.com/4x/api.html#app.param">express param</a> function.  
+<xmp>
+router.param('comment', function(req, res, next, id) {
+  var query = Comment.findById(id);
+  query.exec(function (err, comment){
+    if (err) { return next(err); }
+    if (!comment) { return next(new Error("can't find comment")); }
+    req.comment = comment;
+    return next();
+  });
+});
+</xmp>
+Now, whenever we create a route with :comment in it, this function will be run first to get the comment out of the database. The router.param allowed us to define this middleware that is passed to the route.  We use the <a href="http://mongoosejs.com/docs/api.html#index_Mongoose-Query">query interface</a> for mongoose to simplify the access.
+<p>
+Lets use this middleware function to create a route for returning a single comment
+</p><xmp>
+router.get('/comments/:comment', function(req, res) {
+  res.json(req.comment);
+});
+</xmp>
+Since the :comment part of the route was interpreted by the middleware that put the result from mongoose into the req.comment object, all we have to do is to return the JSON back to the client.
+<p>
+The :comment part of the URL will be the ID given to the comment in mongo.  So, 
+you should be able to enter a URL like this to test your setup:
+</p><xmp>
+http://YOURIP/comments/54f4b19425b53f6a052851ce
+</xmp>
+</li><li> Now let's implement the route to allow upvoting.  We will use our middleware to identify the comment and then open up a route on this comment to upvote it.
+Add the upvote method to the models/Comments.js schema.
+<xmp>
+CommentSchema.methods.upvote = function(cb) {
+  this.upvotes += 1;
+  this.save(cb);
+};
+</xmp>
+Then create a PUT route in routes/index.js
+<xmp>
+router.put('/comments/:comment/upvote', function(req, res, next) {
+  req.comment.upvote(function(err, comment){
+    if (err) { return next(err); }
+    res.json(comment);
+  });
+});
+</xmp>
+You should now be able to test your route using curl.  First access the route to GET all of the comments.  Find the id of one of the comments, and use curl to upvote it.
+<xmp>
+curl -X PUT http://localhost:3000/comments/<COMMENT ID>/upvote
+</xmp>
+</li><li> Now use the URL to make sure that the upvote count was incremented.
+
+</li><li> Now that our backend is working, we just need to wire it up to our angular frontend.  First we will create a getAll() function to retrieve comments from our REST service in public/javascripts/app.js.
+<xmp>
+  $scope.getAll = function() {
+    return $http.get('/comments').success(function(data){
+      angular.copy(data, $scope.comments);
+    });
+  };
+</xmp>
+You will need to inject the $http service into your controller.
+<xmp>
+angular.module('comment', [])
+.controller('MainCtrl', [
+  '$scope','$http',
+  function($scope,$http){
+</xmp>
+Upon success, we will copy the data from the GET REST service into our $scope comments array.  The <a href="https://docs.angularjs.org/api/ng/function/angular.copy">angular.copy</a> function will update the view.  Now we just need to find a way to call getAll at the right time.
+</li><li> Now that you have implemented one backend interface, the others should be easy.  Lets modify the addComment function to write the output to the mongo database.  
+</li><li> First make a 'create' function that will write a comment to the database.
+<xmp>
+  $scope.create = function(comment) {
+    return $http.post('/comments', comment).success(function(data){
+      $scope.comments.push(data);
+    });
+  };
+</xmp>
+When the call to the /comments REST service is successful, the data will be pushed onto the comments array. Now you just need to call this function from your addComment function.
+<xmp>
+      if($scope.formContent === '') { return; }
+      console.log("In addComment with "+$scope.formContent);
+      $scope.create({
+        title: $scope.formContent,
+        upvotes: 0,
+      });
+      $scope.formContent = '';
+</xmp>
+Test this function to make sure you can create new comments and see them displayed.  You should be able to refresh the page and still see them.
+</li><li> Now you need to be able to save the upvoting for your comments.  
+Follow the same process of creating a function to save out the upvote using your PUT REST route, then add it to the upvote function.
+<xmp>
+    $scope.upvote = function(comment) {
+      return $http.put('/comments/' + comment._id + '/upvote')
+        .success(function(data){
+          console.log("upvote worked");
+          comment.upvotes += 1;
+        });
+    };
+</xmp>
+And then in our controller, we simply replace incrementUpvotes() with this:
+<xmp>
+    $scope.incrementUpvotes = function(comment) {
+      $scope.upvote(comment);
+    };
+</xmp>
+</li><li>Test to make sure the upvotes are maintained across refreshes.
+</li></ol>
+
+
+</body></html>
